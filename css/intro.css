@@ -1,0 +1,112 @@
+/* BORD site — launch intro. Ports the app's LaunchView choreography:
+   the cobalt hex tile-snaps in first (scale 1.06, rotate −2° → settle),
+   then B · R · D draw themselves in, stroke first, ink fill after —
+   the Hinge logo-draw move in BORD's own hand. Plays once per session;
+   skipped entirely under prefers-reduced-motion (see js/intro.js). */
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--linen);
+  transition: opacity 450ms ease, transform 450ms ease;
+}
+
+.intro.is-leaving {
+  opacity: 0;
+  transform: scale(0.97);   /* the app's leaving move, exactly */
+  pointer-events: none;
+}
+
+.intro-mark {
+  display: flex;
+  align-items: center;
+  gap: 7px;                 /* LaunchView letter spacing */
+}
+
+@media (max-width: 480px) {
+  .intro-mark { transform: scale(0.78); }
+}
+
+/* Letters: hidden until the sequence starts, then stroke-drawn and filled.
+   Per-letter stagger set inline via --d (B → R → D). */
+
+.intro-letter { width: 60px; height: 84px; overflow: visible; }
+
+/* The dash budget (1600) must exceed the glyph outline length in EVERY
+   font that could render these letters — if the outline is longer than
+   the dash, the excess strokes itself immediately and a black fragment
+   pops up at first paint. The opacity gate makes that impossible even
+   so: a letter paints nothing at all until its turn. */
+.intro-letter text {
+  font-family: var(--font-display);
+  font-size: 60px;
+  font-weight: 700;
+  fill: transparent;
+  stroke: #1A1714;   /* literal ink — the overlay never depends on vars */
+  stroke-width: 1.4;
+  stroke-dasharray: 1600;
+  stroke-dashoffset: 1600;
+  opacity: 0;
+}
+
+.intro.is-playing .intro-letter text {
+  animation:
+    intro-appear 10ms linear var(--d) forwards,
+    intro-draw 1000ms ease-in-out var(--d) both,
+    intro-fill 500ms ease-out calc(var(--d) + 700ms) both;
+}
+
+@keyframes intro-appear {
+  to { opacity: 1; }
+}
+
+@keyframes intro-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes intro-fill {
+  to { fill: #1A1714; stroke-opacity: 0; }
+}
+
+/* The hex: the game piece lands first, like a placed Catan tile.
+   Its cobalt glow is a gradient underlay inside the same wrapper —
+   never a drop-shadow filter, which can flash a detached black
+   rectangle during first composite in WebKit/Chrome. The glow is
+   part of the logo and moves with it. */
+
+.intro-hex-wrap {
+  position: relative;
+  display: flex;
+  opacity: 0;
+}
+
+.intro-hex-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -18% -22% -40%;
+  background: radial-gradient(ellipse 55% 45% at 50% 62%,
+              rgba(39, 67, 214, 0.26), transparent 70%);
+}
+
+.intro-hex {
+  position: relative;
+  width: 62px;
+  height: 62px;
+}
+
+/* Same hardening as .wm-hex path (see base.css): direct rule, literal
+   cobalt, so no host stylesheet can turn the tile black. */
+.intro-hex path { fill: #2743D6 !important; }
+
+.intro.is-playing .intro-hex-wrap {
+  animation: intro-tile-snap 550ms cubic-bezier(0.33, 1.12, 0.5, 1) 80ms both;
+}
+
+@keyframes intro-tile-snap {
+  from { opacity: 0; transform: scale(1.06) rotate(-2deg); }
+  to   { opacity: 1; transform: none; }
+}

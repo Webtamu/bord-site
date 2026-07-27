@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BORD — Free Catan with every drink</title>
+  <meta name="description" content="BORD seats you at a real table with three verified players at a boba shop nearby. Table, players & Catan — free with your drink." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400..600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/sections.css" />
+  <link rel="stylesheet" href="css/intro.css" />
+  <noscript><style>.intro { display: none; }</style></noscript>
+</head>
+<body>
+
+<!-- Launch intro — the B⬡RD moment, ported from the app's LaunchView.
+     Hex tile-snaps in, letters draw themselves, screen settles away. -->
+<div class="intro" id="intro" role="presentation" aria-hidden="true">
+  <div class="intro-mark">
+    <svg class="intro-letter" viewBox="0 0 60 84" style="--d: 350ms">
+      <text x="30" y="66" text-anchor="middle">B</text>
+    </svg>
+    <span class="intro-hex-wrap">
+      <svg class="intro-hex" viewBox="0 0 100 100">
+        <path fill="#2743D6" d="M43.35 5.84 Q50.00 2.00 56.65 5.84 L84.92 22.16 Q91.57 26.00 91.57 33.68 L91.57 66.32 Q91.57 74.00 84.92 77.84 L56.65 94.16 Q50.00 98.00 43.35 94.16 L15.08 77.84 Q8.43 74.00 8.43 66.32 L8.43 33.68 Q8.43 26.00 15.08 22.16 Z"/>
+      </svg>
+    </span>
+    <svg class="intro-letter" viewBox="0 0 60 84" style="--d: 650ms">
+      <text x="30" y="66" text-anchor="middle">R</text>
+    </svg>
+    <svg class="intro-letter" viewBox="0 0 60 84" style="--d: 900ms">
+      <text x="30" y="66" text-anchor="middle">D</text>
+    </svg>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="#top" aria-label="BORD">B<svg class="wm-hex" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path fill="#2743D6" d="M43.35 5.84 Q50.00 2.00 56.65 5.84 L84.92 22.16 Q91.57 26.00 91.57 33.68 L91.57 66.32 Q91.57 74.00 84.92 77.84 L56.65 94.16 Q50.00 98.00 43.35 94.16 L15.08 77.84 Q8.43 74.00 8.43 66.32 L8.43 33.68 Q8.43 26.00 15.08 22.16 Z"/></svg>RD</a>
+    <nav class="site-nav" aria-label="Sections">
+      <a href="#how">How it works</a>
+      <a href="#trust">Why people show up</a>
+      <a href="#shops">For shops</a>
+      <a href="#pilot">Pilot</a>
+    </nav>
+    <a class="btn btn-primary" href="#join">Join the first nights</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- Hero ................................................................ -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <p class="eyebrow" data-reveal>Free Catan with every drink</p>
+        <h1 class="display" data-reveal>You&rsquo;re one tap from a&nbsp;real&nbsp;table.</h1>
+        <p class="lede" data-reveal>
+          BORD seats you with three verified players at a boba shop nearby —
+          matched in minutes, not group chats. The table, the players, and the
+          game are free with your drink.
+        </p>
+        <div class="hero-ctas" data-reveal>
+          <a class="btn btn-primary" href="#join">Join the first nights</a>
+          <a class="btn btn-ghost" href="#shops">For shops</a>
+        </div>
+        <p class="live-line" data-reveal>
+          <span class="pulse-dot" aria-hidden="true"></span>
+          SCHEDULED NIGHTS OPEN &middot; CONVOY DISTRICT, SAN DIEGO
+        </p>
+      </div>
+
+      <div class="hero-visual" data-reveal>
+        <!-- Faithful still of the app's queue dock card -->
+        <div class="card dock-card" aria-label="Preview of the BORD queue card">
+          <div class="dock-label">
+            <span class="eyebrow">Tonight &middot; Catan</span>
+            <span class="seat-dots" aria-label="1 of 4 seats taken">
+              <span class="seat-dot is-taken"></span><span class="seat-dot"></span><span class="seat-dot"></span><span class="seat-dot"></span>
+            </span>
+          </div>
+          <p class="dock-hint">Pick your drink</p>
+          <div class="chip-row">
+            <span class="chip is-selected">Brown sugar boba</span>
+            <span class="chip">Matcha latte</span>
+            <span class="chip">Jasmine tea</span>
+            <span class="chip">Pick there</span>
+          </div>
+          <div class="party-toggle" aria-hidden="true">
+            <span class="is-on">Solo</span>
+            <span>Duo</span>
+          </div>
+          <span class="btn btn-primary dock-cta">Order drink &amp; queue &middot; $6</span>
+          <p class="dock-caption">Table, players &amp; Catan — free with your drink.</p>
+        </div>
+
+        <!-- Signature element: the top-down table with seats -->
+        <div class="card seated-card" aria-label="3 of 4 seated">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+            <rect x="12" y="12" width="20" height="20" rx="6" fill="#F5F2EC" stroke="#1A1714" stroke-width="1.5"/>
+            <circle cx="22" cy="5"  r="4" fill="#2743D6"/>
+            <circle cx="39" cy="22" r="4" fill="#275D43"/>
+            <circle cx="22" cy="39" r="4" fill="#1A1714"/>
+            <circle cx="5"  cy="22" r="4" fill="none" stroke="#8A837A" stroke-width="1.5"/>
+          </svg>
+          <span class="mono">3 OF 4 SEATED</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works ................................................................ -->
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-reveal>How it works</p>
+        <h2 class="display" data-reveal>Queue. Match. Walk over.</h2>
+      </div>
+      <div class="steps">
+        <div class="card step" data-reveal>
+          <div class="step-figure" aria-hidden="true">
+            <svg width="40" height="44" viewBox="0 0 40 44" fill="none">
+              <path d="M10 12h20l-3 26a4 4 0 0 1-4 3.6h-6A4 4 0 0 1 13 38L10 12Z" stroke="currentColor" stroke-width="1.8" fill="none"/>
+              <path d="M17 12 25 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="16.5" cy="33" r="2" fill="currentColor"/>
+              <circle cx="22.5" cy="35" r="2" fill="currentColor"/>
+              <circle cx="20"   cy="29" r="2" fill="currentColor"/>
+            </svg>
+          </div>
+          <p class="eyebrow">Queue</p>
+          <h3 class="display">One tap, drink in hand</h3>
+          <p>Pick your drink and tap once. You&rsquo;re in the queue while
+             you&rsquo;re still picking a hoodie. Bring a friend — duos are
+             never split.</p>
+        </div>
+        <div class="card step" data-reveal>
+          <div class="step-figure" aria-hidden="true">
+            <svg width="48" height="44" viewBox="0 0 48 44" fill="none">
+              <rect x="14" y="12" width="20" height="20" rx="6" stroke="currentColor" stroke-width="1.8" fill="none"/>
+              <circle cx="24" cy="5"  r="3.5" fill="currentColor"/>
+              <circle cx="43" cy="22" r="3.5" fill="currentColor"/>
+              <circle cx="24" cy="39" r="3.5" fill="currentColor"/>
+              <circle cx="5"  cy="22" r="3.5" fill="currentColor"/>
+            </svg>
+          </div>
+          <p class="eyebrow">Match</p>
+          <h3 class="display">Four seats, all confirmed</h3>
+          <p>Every player is ID-verified, and all four confirm their seats
+             before the table is set. No table of maybes — everyone you meet
+             chose to be there.</p>
+        </div>
+        <div class="card step" data-reveal>
+          <div class="step-figure" aria-hidden="true">
+            <svg width="56" height="44" viewBox="0 0 56 44" fill="none">
+              <circle cx="4"  cy="34" r="2" fill="currentColor" opacity="0.3"/>
+              <circle cx="13" cy="31" r="2" fill="currentColor" opacity="0.5"/>
+              <circle cx="22" cy="28" r="2" fill="currentColor" opacity="0.7"/>
+              <circle cx="31" cy="25" r="2" fill="currentColor" opacity="0.9"/>
+              <path d="M42 10h10v30" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+              <path d="M42 10v30" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="48" cy="26" r="1.6" fill="currentColor"/>
+            </svg>
+          </div>
+          <p class="eyebrow">Walk over</p>
+          <h3 class="display">Sit down and play</h3>
+          <p>Your table is set at a shop nearby and your drink is already
+             paid — the night itself has zero transactions. Just show up and
+             roll.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust ................................................................ -->
+  <section id="trust" class="band band-trust">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-reveal>Why people show up</p>
+        <h2 class="display" data-reveal>Showing up is the whole game.</h2>
+        <p data-reveal>A pickup game only works if all four chairs fill.
+           Everything in BORD is built to make showing up the norm.</p>
+      </div>
+      <div class="band-grid">
+        <div class="band-item" data-reveal>
+          <h3 class="display">Verified, every one</h3>
+          <p>Everyone is ID-verified before their first night, and you never
+             meet anyone outside a staffed public shop. Women-only tables are
+             an opt-in filter.</p>
+        </div>
+        <div class="band-item" data-reveal>
+          <h3 class="display">Karma you can see</h3>
+          <p>Reliability is worn, not scored. Show up on time and your tier
+             climbs — and higher tiers match first.</p>
+          <div class="tier-row" aria-label="Karma tiers">
+            <span class="tier">New</span>
+            <span class="tier-arrow" aria-hidden="true">&rarr;</span>
+            <span class="tier">Reliable</span>
+            <span class="tier-arrow" aria-hidden="true">&rarr;</span>
+            <span class="tier is-top">Trusted</span>
+          </div>
+        </div>
+        <div class="band-item" data-reveal>
+          <h3 class="display">A drink on the line</h3>
+          <p>Your drink is ordered the moment you queue. Skip the night and it
+             goes to the next player — and your karma dips. Cancel before
+             you&rsquo;re matched and we cancel the drink order, full refund.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- For shops ................................................................ -->
+  <section id="shops" class="band band-shops">
+    <div class="wrap shops-grid">
+      <div class="shops-copy">
+        <p class="eyebrow" data-reveal>For shops</p>
+        <h2 class="display" data-reveal>Your quietest tables, working.</h2>
+        <p data-reveal>BORD fills weeknight dead hours with prepaid players who
+           order, play two hours, and reset the table themselves.</p>
+        <ul class="shops-points">
+          <li data-reveal><span class="point-mark" aria-hidden="true">&#9670;</span>
+            <span><strong>Money moves before the night.</strong> We buy drink
+            voucher blocks up front, on a plain invoice. If we ever disappear,
+            unused vouchers stay yours.</span></li>
+          <li data-reveal><span class="point-mark" aria-hidden="true">&#9670;</span>
+            <span><strong>Staff take zero taps.</strong> Players redeem on
+            their own phones at the counter — a green screen with a moving
+            clock means the drink is already paid. Training is that one
+            sentence.</span></li>
+          <li data-reveal><span class="point-mark" aria-hidden="true">&#9670;</span>
+            <span><strong>Players do the physical ops.</strong> The
+            highest-karma player sets up the game and packs it away. We supply
+            the crate: three copies of Catan, table tents, one shelf.</span></li>
+          <li data-reveal><span class="point-mark" aria-hidden="true">&#9670;</span>
+            <span><strong>The app is the bad guy.</strong> It reserves the
+            table, ends the session on time, and says no to flakers — your
+            staff never have to.</span></li>
+        </ul>
+        <a class="btn btn-ghost-light" href="mailto:shops@bordgame.app" data-reveal>Get your shop on BORD</a>
+      </div>
+
+      <div class="receipt" data-reveal aria-label="One weeknight table, by the numbers">
+        <p class="receipt-title">One dead 4-top &middot; Tuesday 7&ndash;9:30pm</p>
+        <div class="receipt-row"><span>4 drinks, prepaid</span><span>$24.00</span></div>
+        <div class="receipt-row"><span>Drink cost, about</span><span>&minus;$7.00</span></div>
+        <div class="receipt-row is-total"><span>Kept by the shop</span><span>~$17.00</span></div>
+        <p class="receipt-note">On seats that were earning zero — before
+           anyone&rsquo;s friend orders a second round.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pilot ................................................................ -->
+  <section id="pilot" class="pilot">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-reveal>The pilot</p>
+        <h2 class="display" data-reveal>First up: Convoy District, San&nbsp;Diego.</h2>
+        <p class="lede" data-reveal>We&rsquo;re starting where the tables are —
+           boba and tea shops with quiet weeknights and doors open past ten.
+           Scheduled nights seed each neighborhood; the live queue is
+           invite-only, unlocked by playing three scheduled nights.</p>
+      </div>
+      <div class="card stat-strip" data-reveal>
+        <div class="stat"><span class="mono">1</span><small>Game: Catan</small></div>
+        <div class="stat"><span class="mono">4</span><small>Seats per table</small></div>
+        <div class="stat"><span class="mono">$6</span><small>Your drink</small></div>
+        <div class="stat"><span class="mono">2&half; h</span><small>Doors to done</small></div>
+        <div class="stat"><span class="mono">0</span><small>Night-of transactions</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing CTA ................................................................ -->
+  <section id="join">
+    <div class="wrap cta-grid">
+      <div class="card cta-card" data-reveal>
+        <p class="eyebrow">Players</p>
+        <h3 class="display">Join the first nights</h3>
+        <p>Scheduled Catan nights are how it starts. Come solo or bring a
+           duo — you&rsquo;ll never be split up.</p>
+        <a class="btn btn-primary" href="mailto:play@bordgame.app">Save me a seat</a>
+      </div>
+      <div class="card cta-card" data-reveal>
+        <p class="eyebrow">Shops</p>
+        <h3 class="display">Put BORD on your quietest night</h3>
+        <p>One conversation, one shelf, money up front. We&rsquo;ll come by on
+           a Tuesday afternoon — the dead hours make our pitch for us.</p>
+        <a class="btn btn-ghost" href="mailto:shops@bordgame.app">Talk to us</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span class="wordmark" aria-label="BORD">B<svg class="wm-hex" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path fill="#2743D6" d="M43.35 5.84 Q50.00 2.00 56.65 5.84 L84.92 22.16 Q91.57 26.00 91.57 33.68 L91.57 66.32 Q91.57 74.00 84.92 77.84 L56.65 94.16 Q50.00 98.00 43.35 94.16 L15.08 77.84 Q8.43 74.00 8.43 66.32 L8.43 33.68 Q8.43 26.00 15.08 22.16 Z"/></svg>RD</span>
+    <small>Table, players &amp; Catan — free with your drink.</small>
+    <small>Made in San Diego</small>
+  </div>
+</footer>
+
+<script src="js/intro.js"></script>
+<script src="js/reveal.js"></script>
+</body>
+</html>

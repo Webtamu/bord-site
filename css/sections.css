@@ -1,0 +1,353 @@
+/* BORD site — per-section styles, top to bottom */
+
+/* --- Header -------------------------------------------------------------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(245, 242, 236, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  height: 4.25rem;
+}
+
+.site-nav {
+  display: flex;
+  gap: 1.75rem;
+  margin-left: auto;
+  font-size: var(--size-small);
+  font-weight: 500;
+  color: var(--stone);
+}
+.site-nav a { transition: color var(--hover); }
+.site-nav a:hover { color: var(--ink); }
+
+.site-header .btn { padding: 0.5rem 1.125rem; font-size: 0.875rem; }
+
+@media (max-width: 720px) {
+  .site-nav { display: none; }
+  .site-header .btn { margin-left: auto; }
+}
+
+/* --- Hero ------------------------------------------------------------------ */
+
+.hero { padding-block: clamp(3.5rem, 7vw, 6rem); }
+
+.hero .wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+.hero-copy { display: flex; flex-direction: column; gap: 1.375rem; align-items: flex-start; }
+
+.hero-copy .lede { font-size: 1.125rem; }
+
+.hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+/* Live line — the page's single ambient loop */
+.live-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-family: var(--font-mono);
+  font-size: var(--size-label);
+  letter-spacing: 0.06em;
+  color: var(--stone);
+}
+
+.pulse-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cobalt);
+  flex: none;
+}
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--cobalt);
+  animation: ping 1.5s ease-out infinite;
+}
+@keyframes ping {
+  from { transform: scale(1); opacity: 0.5; }
+  to   { transform: scale(2.6); opacity: 0; }
+}
+
+/* Dock card — faithful CSS recreation of the app's queue card */
+
+.hero-visual { position: relative; }
+
+.dock-card {
+  padding: var(--gutter);
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.dock-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.seat-dots { display: flex; gap: 5px; }
+.seat-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1.2px solid rgba(26, 23, 20, 0.3);
+}
+.seat-dot.is-taken { background: var(--ink); border-color: var(--ink); }
+
+.dock-hint { font-size: 0.8125rem; color: var(--stone); }
+
+.chip-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+.party-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--linen);
+  border-radius: 999px;
+  padding: 3px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+}
+.party-toggle span { padding: 0.5rem; border-radius: 999px; color: var(--stone); }
+.party-toggle .is-on { background: var(--card); color: var(--ink); box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+
+.dock-cta {
+  width: 100%;
+  font-size: 1.0625rem;
+  padding-block: 1rem;
+  pointer-events: none;          /* a prop, not a control */
+}
+
+.dock-caption {
+  font-size: 0.8125rem;
+  color: var(--stone);
+  text-align: center;
+}
+
+/* Seated mini-card — the signature top-down table, peeking in */
+
+.seated-card {
+  position: absolute;
+  left: -3.25rem;
+  bottom: -2.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.125rem;
+  border-radius: var(--radius-field);
+}
+
+.seated-card .mono {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+}
+
+@media (max-width: 860px) {
+  .hero .wrap { grid-template-columns: 1fr; }
+  .hero-visual { max-width: 24rem; }
+  .seated-card { left: auto; right: -0.5rem; }
+}
+
+/* --- How it works ------------------------------------------------------------ */
+
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  max-width: 36em;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gutter);
+}
+
+.step {
+  padding: var(--gutter);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.step-figure {
+  height: 3.25rem;
+  display: flex;
+  align-items: center;
+  color: var(--cobalt);
+}
+
+.step .eyebrow { color: var(--cobalt); }
+.step p { color: var(--stone); font-size: var(--size-small); }
+
+@media (max-width: 780px) { .steps { grid-template-columns: 1fr; } }
+
+/* --- Bands (trust = spruce, shops = ink) -------------------------------------- */
+
+.band { color: var(--linen); }
+.band .eyebrow { color: var(--paper-on-dark); }
+.band p { color: var(--paper-on-dark); }
+
+.band-trust { background: var(--spruce-deep); }
+.band-shops { background: var(--ink); }
+
+.band-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.band-item { display: flex; flex-direction: column; gap: 0.625rem; }
+.band-item h3 { color: var(--linen); }
+.band-item p { font-size: var(--size-small); }
+
+@media (max-width: 780px) { .band-grid { grid-template-columns: 1fr; } }
+
+/* Karma tier chips — tiers, never numbers */
+.tier-row {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+.tier {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.375rem 0.875rem;
+  border-radius: 999px;
+  border: 1px solid var(--hairline-light);
+  color: var(--linen);
+}
+.tier.is-top { background: var(--linen); color: var(--spruce-deep); border-color: var(--linen); }
+.tier-arrow { color: var(--paper-on-dark); font-size: 0.8125rem; }
+
+/* --- For shops ---------------------------------------------------------------- */
+
+.shops-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+.shops-copy { display: flex; flex-direction: column; gap: 1.375rem; align-items: flex-start; }
+
+.shops-points { display: flex; flex-direction: column; gap: 1rem; list-style: none; }
+.shops-points li { display: flex; gap: 0.75rem; font-size: var(--size-small); color: var(--paper-on-dark); }
+.shops-points strong { color: var(--linen); font-weight: 600; }
+.point-mark { color: var(--cobalt); flex: none; transform: translateY(1px); }
+.band .point-mark { color: #7C90F2; }   /* cobalt lifted for dark ground */
+
+/* The night-math receipt — mono, tabular, scorepad voice */
+.receipt {
+  background: rgba(245, 242, 236, 0.06);
+  border: 1px solid var(--hairline-light);
+  border-radius: var(--radius-card);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--linen);
+}
+.receipt-title {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--paper-on-dark);
+  margin-bottom: 1.25rem;
+}
+.receipt-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.5rem;
+}
+.receipt-row + .receipt-row { border-top: 1px dashed var(--hairline-light); }
+.receipt-row.is-total { border-top: 1px solid var(--linen); font-weight: 700; }
+.receipt-note {
+  margin-top: 1.25rem;
+  font-size: 0.8125rem;
+  color: var(--paper-on-dark);
+  font-family: var(--font-body);
+}
+
+@media (max-width: 860px) { .shops-grid { grid-template-columns: 1fr; } }
+
+/* --- Pilot ---------------------------------------------------------------------- */
+
+.pilot .wrap { display: flex; flex-direction: column; gap: clamp(2.5rem, 5vw, 4rem); }
+
+.stat-strip {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: clamp(1.25rem, 3vw, 1.75rem) clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.stat { display: flex; flex-direction: column; gap: 0.25rem; }
+.stat .mono { font-size: 1.375rem; font-weight: 600; }
+.stat small {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+/* --- Closing CTA ------------------------------------------------------------------ */
+
+.cta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gutter);
+}
+
+.cta-card {
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.cta-card p { color: var(--stone); font-size: var(--size-small); max-width: 30em; }
+.cta-card .btn { margin-top: 0.5rem; }
+
+@media (max-width: 720px) { .cta-grid { grid-template-columns: 1fr; } }
+
+/* --- Footer -------------------------------------------------------------------------- */
+
+.site-footer {
+  border-top: 1px solid var(--hairline);
+  padding-block: 2.5rem;
+}
+.site-footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.site-footer small { color: var(--stone); font-size: 0.8125rem; }

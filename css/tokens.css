@@ -1,0 +1,47 @@
+/* BORD site — design tokens
+   Source of truth: VISION.md §6 "scorepad" + ios/Bord/Theme.swift.
+   Linen paper, warm ink, cobalt as the ONLY interactive accent,
+   spruce reserved for trust/positive, hairlines over heavy borders. */
+
+:root {
+  /* Palette */
+  --linen:    #F5F2EC;
+  --ink:      #1A1714;
+  --card:     #FFFFFF;
+  --stone:    #8A837A;
+  --cobalt:   #2743D6;
+  --cobalt-deep: #1F36AE;      /* hover only */
+  --spruce:   #275D43;
+  --spruce-deep: #1E4A35;      /* trust band ground */
+  --hairline: rgba(0, 0, 0, 0.08);
+  --hairline-light: rgba(255, 255, 255, 0.16);
+  --paper-on-dark: rgba(245, 242, 236, 0.72);  /* stone-equivalent on ink/spruce */
+
+  /* Type — mirrors the app's three roles: New York serif (display),
+     SF Pro (UI), SF Mono (scorepad utility). Web fallbacks load in
+     index.html; Apple devices render the native faces first. */
+  --font-display: ui-serif, "New York", "Source Serif 4", Georgia, serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "IBM Plex Mono", Menlo, monospace;
+
+  --size-hero:    clamp(2.625rem, 5.5vw, 4rem);      /* 42 → 64 */
+  --size-h2:      clamp(1.875rem, 3.2vw, 2.5rem);    /* 30 → 40 */
+  --size-h3:      1.25rem;
+  --size-body:    1.0625rem;                          /* 17 — app body size */
+  --size-small:   0.9375rem;
+  --size-label:   0.8125rem;                          /* mono eyebrows/stats */
+
+  /* Surfaces — the app's exact card recipe */
+  --radius-card:  22px;
+  --radius-field: 16px;
+  --shadow-card:  0 6px 14px rgba(0, 0, 0, 0.05);
+
+  /* Rhythm */
+  --gutter:       20px;
+  --section-pad:  clamp(4.5rem, 9vw, 7.5rem);
+  --content-max:  68.5rem;                            /* 1096px */
+
+  /* Motion — felt, not seen */
+  --hover:  180ms ease;
+  --reveal: 520ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
