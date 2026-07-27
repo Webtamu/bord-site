@@ -316,7 +316,36 @@
 
 /* --- Pilot ---------------------------------------------------------------------- */
 
-.pilot .wrap { display: flex; flex-direction: column; gap: clamp(2.5rem, 5vw, 4rem); }
+.pilot { position: relative; }
+
+.pilot .wrap {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* Neighborhood map underlay — faint streets and hex pins, edges
+   feathered so it reads as texture, not a widget. */
+.pilot-map {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 85%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 85%, transparent);
+}
+.pilot-map svg { width: 100%; height: 100%; display: block; }
+
+.map-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  fill: var(--stone);
+}
+
+@media (max-width: 720px) { .pilot-map { display: none; } }
 
 .stat-strip {
   display: flex;

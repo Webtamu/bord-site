@@ -255,6 +255,55 @@
 
   <!-- Pilot ................................................................ -->
   <section id="pilot" class="pilot">
+    <!-- Decorative neighborhood map — fictional shops, hex pins.
+         Pure aesthetics: not draggable, not a control. -->
+    <div class="pilot-map" aria-hidden="true">
+      <svg viewBox="0 0 1200 620" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <!-- River, drifting down the right edge -->
+        <path d="M1132 -20 C1096 140, 1176 300, 1108 480 S1120 600, 1114 660"
+              fill="none" stroke="#2743D6" stroke-opacity="0.07" stroke-width="26" stroke-linecap="round"/>
+        <!-- Street grid -->
+        <g stroke="#1A1714" stroke-opacity="0.06" stroke-width="1.4">
+          <path d="M80 0V620"/><path d="M190 0V620"/><path d="M330 0V620"/>
+          <path d="M420 0V620"/><path d="M545 0V620"/><path d="M660 0V620"/>
+          <path d="M790 0V620"/><path d="M900 0V620"/><path d="M1010 0V620"/>
+          <path d="M0 70H1200"/><path d="M0 170H1200"/><path d="M0 260H1200"/>
+          <path d="M0 370H1200"/><path d="M0 460H1200"/><path d="M0 550H1200"/>
+        </g>
+        <!-- Avenues, cutting the grid -->
+        <g stroke="#1A1714" stroke-opacity="0.09" stroke-width="2" stroke-linecap="round">
+          <path d="M-20 500 L780 -20"/>
+          <path d="M600 640 L1220 210"/>
+        </g>
+        <!-- The park, with a pond -->
+        <rect x="840" y="215" width="190" height="130" rx="18"
+              fill="#275D43" fill-opacity="0.06" stroke="#275D43" stroke-opacity="0.14"/>
+        <ellipse cx="905" cy="285" rx="26" ry="17" fill="#2743D6" fill-opacity="0.09"/>
+        <g fill="#275D43" fill-opacity="0.22">
+          <circle cx="980" cy="248" r="3"/><circle cx="1002" cy="300" r="3"/>
+          <circle cx="958" cy="318" r="3"/><circle cx="872" cy="238" r="3"/>
+        </g>
+        <!-- Other shops: hollow, like open seats -->
+        <g fill="none" stroke="#8A837A" stroke-opacity="0.5" stroke-width="1.5">
+          <circle cx="248" cy="330" r="4"/>
+          <circle cx="560" cy="120" r="4"/>
+          <circle cx="855" cy="520" r="4"/>
+        </g>
+        <!-- Boba shops on Bord: hex pins + labels -->
+        <g transform="translate(686 136) scale(0.28)">
+          <path fill="#2743D6" d="M43.35 5.84 Q50.00 2.00 56.65 5.84 L84.92 22.16 Q91.57 26.00 91.57 33.68 L91.57 66.32 Q91.57 74.00 84.92 77.84 L56.65 94.16 Q50.00 98.00 43.35 94.16 L15.08 77.84 Q8.43 74.00 8.43 66.32 L8.43 33.68 Q8.43 26.00 15.08 22.16 Z"/>
+        </g>
+        <text class="map-label" x="726" y="155">JADE RABBIT TEA</text>
+        <g transform="translate(186 476) scale(0.28)">
+          <path fill="#2743D6" d="M43.35 5.84 Q50.00 2.00 56.65 5.84 L84.92 22.16 Q91.57 26.00 91.57 33.68 L91.57 66.32 Q91.57 74.00 84.92 77.84 L56.65 94.16 Q50.00 98.00 43.35 94.16 L15.08 77.84 Q8.43 74.00 8.43 66.32 L8.43 33.68 Q8.43 26.00 15.08 22.16 Z"/>
+        </g>
+        <text class="map-label" x="226" y="481">CLOUD &amp; PEARL</text>
+        <g transform="translate(866 466) scale(0.28)">
+          <path fill="#2743D6" d="M43.35 5.84 Q50.00 2.00 56.65 5.84 L84.92 22.16 Q91.57 26.00 91.57 33.68 L91.57 66.32 Q91.57 74.00 84.92 77.84 L56.65 94.16 Q50.00 98.00 43.35 94.16 L15.08 77.84 Q8.43 74.00 8.43 66.32 L8.43 33.68 Q8.43 26.00 15.08 22.16 Z"/>
+        </g>
+        <text class="map-label" x="906" y="485">LUNA BOBA</text>
+      </svg>
+    </div>
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow" data-reveal>Sessions</p>
