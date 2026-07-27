@@ -72,24 +72,12 @@
   to { fill: #1A1714; stroke-opacity: 0; }
 }
 
-/* The hex: the game piece lands first, like a placed Catan tile.
-   Its cobalt glow is a gradient underlay inside the same wrapper —
-   never a drop-shadow filter, which can flash a detached black
-   rectangle during first composite in WebKit/Chrome. The glow is
-   part of the logo and moves with it. */
+/* The hex: the game piece lands first, like a placed Catan tile. */
 
 .intro-hex-wrap {
   position: relative;
   display: flex;
   opacity: 0;
-}
-
-.intro-hex-wrap::before {
-  content: "";
-  position: absolute;
-  inset: -18% -22% -40%;
-  background: radial-gradient(ellipse 55% 45% at 50% 62%,
-              rgba(39, 67, 214, 0.26), transparent 70%);
 }
 
 .intro-hex {
