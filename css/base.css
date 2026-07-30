@@ -155,6 +155,34 @@ a:focus-visible {
   outline-offset: 3px;
 }
 
+/* Optical vertical centering of pill labels.
+   align-items:center centers the LINE BOX, not the letters. Inside that
+   box the baseline sits per the font's ascent/descent, which are not
+   symmetric about the cap band, so the label drifts by
+   (descent - (ascent - capHeight)) / 2. That error is independent of
+   line-height and padding — no padding tuning removes it, and its size
+   and direction change with whichever face actually resolves from
+   -apple-system / Inter / Segoe UI.
+
+   Trimming the label box to capHeight..baseline makes the box edges
+   follow the letters instead of the font's metrics, so symmetric padding
+   centers correctly in any face. The trim needs a block container, which
+   is why labels are wrapped in .lbl — the pills stay flex, so icon
+   siblings (the laurel on the Trusted tier) are unaffected.
+
+   Trimming removes (line-height - capHeight) ~= 0.83em, so half goes
+   back on each side to preserve current pill heights. Browsers without
+   text-box support fall through to exactly today's rendering. */
+@supports (text-box: trim-both cap alphabetic) {
+  .btn > .lbl,
+  .chip > .lbl,
+  .tier > .lbl {
+    display: block;
+    text-box: trim-both cap alphabetic;
+    padding-block: 0.415em;
+  }
+}
+
 /* --- Chips — capsules, cobalt only when selected ------------------------ */
 
 .chip {
