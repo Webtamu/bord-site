@@ -108,13 +108,22 @@ section { padding-block: var(--section-pad); }
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  /* justify-content centers the label BOX; text-align centers the lines
+     inside it. Both are needed — a label that wraps (long CTA, narrow
+     phone, large system font) would otherwise sit left-ragged. */
+  text-align: center;
   gap: 0.5rem;
   font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 600;
   padding: 0.9375rem 1.75rem;
   border-radius: 999px;
-  border: none;
+  /* Transparent, not none: the ghost variants carry a 1.2px border, and
+     these buttons are shrink-to-fit, so border-box sizing does not absorb
+     it. Without a matching border the primary renders 2.4px shorter and
+     narrower — visible where the two sit side by side (hero CTAs, the
+     session rows). Reserving the border keeps every variant identical. */
+  border: 1.2px solid transparent;
   cursor: pointer;
   transition: background var(--hover), border-color var(--hover),
               color var(--hover), transform var(--hover);
