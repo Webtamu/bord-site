@@ -2,14 +2,54 @@
 
 /* --- Header -------------------------------------------------------------- */
 
+/* The bar takes the color of whatever panel is passing under it, fading
+   between grounds so it reads as part of that panel instead of floating
+   over it. js/header.js sets data-theme from the section at the header's
+   midline; every color below is driven off these four properties. */
 .site-header {
+  --header-bg: rgba(245, 242, 236, 0.9);
+  --header-fg: var(--ink);
+  --header-muted: var(--stone);
+  --header-line: var(--hairline);
+  --header-hex: #2743D6;
+
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(245, 242, 236, 0.9);
+  background: var(--header-bg);
+  color: var(--header-fg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--header-line);
+  transition: background-color var(--header-fade),
+              border-color var(--header-fade),
+              color var(--header-fade);
+}
+
+.site-header[data-theme="spruce"] {
+  --header-bg: rgba(30, 74, 53, 0.92);      /* spruce-deep */
+  --header-fg: var(--linen);
+  --header-muted: var(--paper-on-dark);
+  --header-line: var(--hairline-light);
+  --header-hex: #7C90F2;                     /* cobalt lifted for dark ground */
+}
+
+.site-header[data-theme="ink"] {
+  --header-bg: rgba(26, 23, 20, 0.92);       /* ink */
+  --header-fg: var(--linen);
+  --header-muted: var(--paper-on-dark);
+  --header-line: var(--hairline-light);
+  --header-hex: #7C90F2;
+}
+
+.site-header .wordmark {
+  color: var(--header-fg);
+  transition: color var(--header-fade);
+}
+
+.site-header .wm-hex path {
+  fill: var(--header-hex) !important;
+  transition: fill var(--header-fade);
 }
 
 .site-header .wrap {
@@ -25,10 +65,11 @@
   margin-left: auto;
   font-size: var(--size-small);
   font-weight: 500;
-  color: var(--stone);
+  color: var(--header-muted);
+  transition: color var(--header-fade);
 }
 .site-nav a { transition: color var(--hover); }
-.site-nav a:hover { color: var(--ink); }
+.site-nav a:hover { color: var(--header-fg); }
 
 .site-header .btn { padding: 0.5rem 1.125rem; font-size: 0.875rem; }
 

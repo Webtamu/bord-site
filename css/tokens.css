@@ -44,4 +44,5 @@
   /* Motion — felt, not seen */
   --hover:  180ms ease;
   --reveal: 520ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  --header-fade: 450ms ease;   /* header taking on the passing panel's color */
 }
