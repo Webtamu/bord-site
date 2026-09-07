@@ -1,6 +1,6 @@
 /* BORD site — launch intro. Ports the app's LaunchView choreography:
-   the cobalt hex tile-snaps in first (scale 1.06, rotate −2° → settle),
-   then B · R · D draw themselves in, stroke first, ink fill after —
+   the ink-blue hex tile-snaps in first (scale 1.06, rotate −2° → settle),
+   then b · r · d draw themselves in, stroke first, ink fill after —
    the Hinge logo-draw move in BORD's own hand. Plays once per session;
    skipped entirely under prefers-reduced-motion (see js/intro.js). */
 
@@ -11,7 +11,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--linen);
+  background: var(--kraft) url("../img/fiber.svg") repeat;
+  background-size: 360px 360px;
   transition: opacity 450ms ease, transform 450ms ease;
 }
 
@@ -23,8 +24,8 @@
 
 .intro-mark {
   display: flex;
-  align-items: center;
-  gap: 7px;                 /* LaunchView letter spacing */
+  align-items: flex-end;    /* letters and hex share a baseline row */
+  gap: 0;
 }
 
 @media (max-width: 480px) {
@@ -34,7 +35,8 @@
 /* Letters: hidden until the sequence starts, then stroke-drawn and filled.
    Per-letter stagger set inline via --d (B → R → D). */
 
-.intro-letter { width: 60px; height: 84px; overflow: visible; }
+.intro-letter { width: 44px; height: 84px; overflow: visible; }
+.intro-letter.is-r { width: 34px; }
 
 /* The dash budget (1600) must exceed the glyph outline length in EVERY
    font that could render these letters — if the outline is longer than
@@ -43,10 +45,10 @@
    so: a letter paints nothing at all until its turn. */
 .intro-letter text {
   font-family: var(--font-display);
-  font-size: 60px;
-  font-weight: 700;
+  font-size: 72px;
+  font-weight: 500;
   fill: transparent;
-  stroke: #1A1714;   /* literal ink — the overlay never depends on vars */
+  stroke: #2A2520;   /* literal ink — the overlay never depends on vars */
   stroke-width: 1.4;
   stroke-dasharray: 1600;
   stroke-dashoffset: 1600;
@@ -69,26 +71,29 @@
 }
 
 @keyframes intro-fill {
-  to { fill: #1A1714; stroke-opacity: 0; }
+  to { fill: #2A2520; stroke-opacity: 0; }
 }
 
-/* The hex: the game piece lands first, like a placed Catan tile. */
+/* The hex: the game piece lands first, like a placed tile. Sized to the o
+   (0.508 × 72px = 36.6px of ink → 38.6px frame), hung under the baseline
+   the way the o is, gaps per WordmarkMetrics. */
 
 .intro-hex-wrap {
   position: relative;
   display: flex;
   opacity: 0;
+  margin: 0 1.5px 17.5px 3px;   /* gap 0.042em · 0.0205em; sits on the 66px baseline */
 }
 
 .intro-hex {
   position: relative;
-  width: 62px;
-  height: 62px;
+  width: 33.5px;
+  height: 38.6px;
 }
 
 /* Same hardening as .wm-hex path (see base.css): direct rule, literal
    cobalt, so no host stylesheet can turn the tile black. */
-.intro-hex path { fill: #2743D6 !important; }
+.intro-hex path { fill: #35558A !important; }
 
 .intro.is-playing .intro-hex-wrap {
   animation: intro-tile-snap 550ms cubic-bezier(0.33, 1.12, 0.5, 1) 80ms both;

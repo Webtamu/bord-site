@@ -1,55 +1,16 @@
-/* BORD site — per-section styles, top to bottom */
+/* BORD site — per-section styles, top to bottom.
+   One ground the whole way down: the album has no dark bands. */
 
 /* --- Header -------------------------------------------------------------- */
 
-/* The bar takes the color of whatever panel is passing under it, fading
-   between grounds so it reads as part of that panel instead of floating
-   over it. js/header.js sets data-theme from the section at the header's
-   midline; every color below is driven off these four properties. */
 .site-header {
-  --header-bg: rgba(245, 242, 236, 0.9);
-  --header-fg: var(--ink);
-  --header-muted: var(--stone);
-  --header-line: var(--hairline);
-  --header-hex: #2743D6;
-
   position: sticky;
   top: 0;
   z-index: 10;
-  background: var(--header-bg);
-  color: var(--header-fg);
+  background: rgba(198, 169, 126, 0.92);   /* kraft */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--header-line);
-  transition: background-color var(--header-fade),
-              border-color var(--header-fade),
-              color var(--header-fade);
-}
-
-.site-header[data-theme="spruce"] {
-  --header-bg: rgba(30, 74, 53, 0.92);      /* spruce-deep */
-  --header-fg: var(--linen);
-  --header-muted: var(--paper-on-dark);
-  --header-line: var(--hairline-light);
-  --header-hex: #7C90F2;                     /* cobalt lifted for dark ground */
-}
-
-.site-header[data-theme="ink"] {
-  --header-bg: rgba(26, 23, 20, 0.92);       /* ink */
-  --header-fg: var(--linen);
-  --header-muted: var(--paper-on-dark);
-  --header-line: var(--hairline-light);
-  --header-hex: #7C90F2;
-}
-
-.site-header .wordmark {
-  color: var(--header-fg);
-  transition: color var(--header-fade);
-}
-
-.site-header .wm-hex path {
-  fill: var(--header-hex) !important;
-  transition: fill var(--header-fade);
+  border-bottom: 1px solid var(--hairline);
 }
 
 .site-header .wrap {
@@ -65,31 +26,29 @@
   margin-left: auto;
   font-size: var(--size-small);
   font-weight: 500;
-  color: var(--header-muted);
-  transition: color var(--header-fade);
+  color: var(--pencil);
 }
 .site-nav a { transition: color var(--hover); }
-.site-nav a:hover { color: var(--header-fg); }
+.site-nav a:hover { color: var(--ink); }
 
 .site-header .btn { padding: 0.5rem 1.125rem; font-size: 0.875rem; }
 
-/* Wordmark collapse — scrolled down, B and RD tuck away so the hex
-   stands alone; back at the top the full B⬡RD returns. */
+/* Wordmark collapse — scrolled down, b and rd tuck away so the hex
+   stands alone; back at the top the full b⬡rd returns. */
 .site-header .wm-letter {
   display: inline-block;
-  overflow: hidden;
+  overflow: clip;            /* clip, not hidden — hidden moves an inline-block's baseline to its bottom edge */
   max-width: 2.5em;
+  vertical-align: baseline;
 }
 .site-header.is-collapsed .wm-letter { max-width: 0; opacity: 0; }
-.site-header.is-collapsed .wordmark { gap: 0; }
+.site-header.is-collapsed .wm-hex { margin: 0; }
 @media (prefers-reduced-motion: no-preference) {
   .site-header .wm-letter {
     transition: max-width 420ms cubic-bezier(0.22, 0.61, 0.36, 1),
                 opacity 260ms ease;
   }
-  .site-header .wordmark {
-    transition: gap 420ms cubic-bezier(0.22, 0.61, 0.36, 1);
-  }
+  .site-header .wm-hex { transition: margin 420ms cubic-bezier(0.22, 0.61, 0.36, 1); }
 }
 
 @media (max-width: 720px) {
@@ -109,9 +68,7 @@
 }
 
 .hero-copy { display: flex; flex-direction: column; gap: 1.375rem; align-items: flex-start; }
-
 .hero-copy .lede { font-size: 1.125rem; }
-
 .hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
 /* Live line — the page's single ambient loop */
@@ -121,24 +78,21 @@
   gap: 0.625rem;
   font-family: var(--font-mono);
   font-size: var(--size-label);
-  letter-spacing: 0.06em;
-  color: var(--stone);
+  letter-spacing: 0.08em;
+  color: var(--pencil);
 }
-
 .pulse-dot {
   position: relative;
-  width: 8px;
-  height: 8px;
+  width: 8px; height: 8px;
   border-radius: 50%;
-  background: var(--cobalt);
+  background: var(--blue);
   flex: none;
 }
 .pulse-dot::after {
   content: "";
-  position: absolute;
-  inset: 0;
+  position: absolute; inset: 0;
   border-radius: 50%;
-  background: var(--cobalt);
+  background: var(--blue);
   animation: ping 1.5s ease-out infinite;
 }
 @keyframes ping {
@@ -146,83 +100,116 @@
   to   { transform: scale(2.6); opacity: 0; }
 }
 
-/* Dock card — faithful CSS recreation of the app's queue card */
+/* The album spread: a taped print, a night card, a stamp — laid on the
+   kraft the way the app's Nights page lays them. */
+.hero-visual { position: relative; min-height: 28rem; }
 
-.hero-visual { position: relative; }
-
-.dock-card {
-  padding: var(--gutter);
-  display: flex;
-  flex-direction: column;
-  gap: 0.875rem;
+.print {
+  position: relative;
+  display: inline-block;
+  background: var(--paper);
+  padding: 5%;
+  box-shadow: var(--shadow-card);
 }
-
-.dock-label {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.print .well {
+  display: block;
+  aspect-ratio: 1 / 0.92;
+  background: #B49E82;
 }
+.print .well svg { width: 100%; height: 100%; }
+.print-caption { margin-top: 0.4rem; font-size: 1.05rem; }
 
-.seat-dots { display: flex; gap: 5px; }
-.seat-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  border: 1.2px solid rgba(26, 23, 20, 0.3);
-}
-.seat-dot.is-taken { background: var(--ink); border-color: var(--ink); }
-
-.dock-hint { font-size: 0.8125rem; color: var(--stone); }
-
-.chip-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-
-.party-toggle {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  background: var(--linen);
-  border-radius: 999px;
-  padding: 3px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  text-align: center;
-}
-.party-toggle span { padding: 0.5rem; border-radius: 999px; color: var(--stone); }
-.party-toggle .is-on { background: var(--card); color: var(--ink); box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
-
-.dock-cta {
-  width: 100%;
-  font-size: 1.0625rem;
-  padding-block: 1rem;
-  pointer-events: none;          /* a prop, not a control */
-}
-
-/* Seated mini-card — the signature top-down table, peeking in */
-
-.seated-card {
+.hero-print {
   position: absolute;
-  left: -3.25rem;
-  bottom: -2.25rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.875rem 1.125rem;
-  border-radius: var(--radius-field);
+  top: 0; left: 0;
+  width: 54%;
+  transform: rotate(-2deg);
 }
+.hero-print .stamp {
+  position: absolute;
+  right: -14%;
+  top: -6%;
+  font-size: 0.875rem;
+  transform: rotate(-10deg);
+}
+.hero-print .print { width: 100%; }
 
-.seated-card .mono {
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  color: var(--ink);
+/* The night card — the app's session card, faithfully */
+.night-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.875rem;
+  align-items: start;
+  padding: 0.875rem;
+  width: 100%;
 }
+.hero-card {
+  position: absolute;
+  right: 0; bottom: 0;
+  width: 82%;
+}
+.night-name { font-weight: 500; font-size: 1.0625rem; }
+.night-meta { font-size: 0.8125rem; color: rgba(42,37,32,0.75); margin-top: 1px; white-space: nowrap; }
+.night-caption {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(42,37,32,0.72);
+  margin-top: 0.3rem;
+  white-space: nowrap;
+}
+.night-card .btn { padding: 0.45rem 0.9rem; font-size: 0.875rem; pointer-events: none; }
+
+/* A die — white, ink pips, a hair of lean */
+.die {
+  position: relative;
+  width: 30px; height: 30px;
+  background: var(--paper);
+  border: 1.3px solid var(--ink);
+  border-radius: 7px;
+  box-shadow: var(--shadow-card);
+  transform: rotate(-8deg);
+  flex: none;
+}
+.die i {
+  position: absolute;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--ink);
+  left: 50%; top: 50%;
+  margin: -2.5px 0 0 -2.5px;
+}
+.die i:nth-child(1) { transform: translate(-7px, -7px); }
+.die i:nth-child(2) { transform: translate( 7px,  7px); }
+.die i:nth-child(3) { transform: translate( 7px, -7px); }
+.die i:nth-child(4) { transform: translate(-7px,  7px); }
+.die i:nth-child(5) { transform: translate( 0,    0); }
+.die.d1 i:nth-child(n+2), .die.d2 i:nth-child(n+3), .die.d4 i:nth-child(5) { display: none; }
+
+/* Chairs round a table — the seat glyph */
+.seats {
+  display: grid;
+  grid-template-columns: repeat(2, 6px);
+  gap: 2px 4px;
+  margin-top: 0.35rem;
+}
+.seats .table { grid-column: 1 / -1; height: 2px; width: 22px; background: rgba(42,37,32,0.55); border-radius: 1px; margin-inline: -3px; }
+.seat { width: 6px; height: 6px; border-radius: 1.5px; border: 1px solid rgba(42,37,32,0.4); }
+.seat.is-taken { background: var(--ink); border-color: var(--ink); }
+.seats-row { display: flex; align-items: center; gap: 0.6rem; }
+
+/* Long table: one row of chairs */
+.seats.long { grid-template-columns: repeat(12, 6px); gap: 4px; }
+.seats.long .table { display: none; }
+
 
 @media (max-width: 860px) {
   .hero .wrap { grid-template-columns: 1fr; }
-  .hero-visual { max-width: 24rem; }
-  .seated-card { left: auto; right: -0.5rem; }
+  .hero-visual { max-width: 26rem; margin-top: 1rem; }
 }
 
-/* --- How it works ------------------------------------------------------------ */
+/* --- Section heads --------------------------------------------------------- */
 
 .section-head {
   display: flex;
@@ -232,10 +219,13 @@
   max-width: 36em;
 }
 
+/* --- How it works ------------------------------------------------------------ */
+
 .steps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--gutter);
+  align-items: start;
 }
 
 .step {
@@ -244,62 +234,59 @@
   flex-direction: column;
   gap: 0.75rem;
 }
+.step-figure { height: 3.5rem; display: flex; align-items: center; }
+.step p { color: var(--pencil); font-size: var(--size-small); }
 
-.step-figure {
-  height: 3.25rem;
-  display: flex;
-  align-items: center;
-  color: var(--cobalt);
+/* dealt cards around the table, for step two */
+.dealt { display: flex; align-items: center; gap: 6px; }
+.dealt .tile {
+  width: 22px; height: 22px;
+  background: var(--paper);
+  box-shadow: var(--shadow-card);
+  font-family: var(--font-display);
+  font-size: 9px;
+  display: grid; place-items: center;
+  border: 1px solid var(--hairline);
 }
+.dealt .tile.you { outline: 2px solid var(--tape-blue); outline-offset: -3px; }
+.dealt .tabletop { width: 40px; height: 18px; background: var(--kraft-deep); border-radius: 5px; border: 1px solid rgba(42,37,32,0.35); }
 
-.step .eyebrow { color: var(--cobalt); }
-.step p { color: var(--stone); font-size: var(--size-small); }
+/* the stamp card mini, for step three */
+.mini-stamps { display: grid; grid-template-columns: repeat(7, 14px); gap: 5px; }
+.mini-stamps i { width: 14px; height: 14px; border-radius: 50%; border: 1px dashed rgba(42,37,32,0.3); }
+.mini-stamps i.on { border: 1.3px solid var(--stamp); position: relative; opacity: 0.85; }
+.mini-stamps i.on::after { content: ""; position: absolute; width: 3px; height: 3px; border-radius: 50%; background: var(--stamp); left: 50%; top: 50%; margin: -1.5px 0 0 -1.5px; }
 
 @media (max-width: 780px) { .steps { grid-template-columns: 1fr; } }
 
-/* --- Bands (trust = spruce, shops = ink) -------------------------------------- */
+/* --- Trust — three index cards ----------------------------------------------- */
 
-.band { color: var(--linen); }
-.band .eyebrow { color: var(--paper-on-dark); }
-.band p { color: var(--paper-on-dark); }
-
-.band-trust { background: var(--spruce-deep); }
-.band-shops { background: var(--ink); }
-
-.band-grid {
+.trust-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(1.5rem, 4vw, 3rem);
+  gap: var(--gutter);
+  align-items: start;
 }
-
-.band-item { display: flex; flex-direction: column; gap: 0.625rem; }
-.band-item h3 { color: var(--linen); }
-.band-item p { font-size: var(--size-small); }
-
-@media (max-width: 780px) { .band-grid { grid-template-columns: 1fr; } }
-
-/* Karma tier chips — tiers, never numbers */
-.tier-row {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-  flex-wrap: wrap;
-  margin-top: 0.5rem;
+.index-card { padding: 1rem 1.125rem 1.125rem; }
+.index-card .title {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding-bottom: 0.4rem;
+  border-bottom: 1.4px dotted rgba(42,37,32,0.5);
+  margin-bottom: 0.75rem;
 }
-.tier {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  padding: 0.375rem 0.875rem;
-  border-radius: 999px;
-  border: 1px solid var(--hairline-light);
-  color: var(--linen);
-}
-.tier-laurel { width: 0.8125rem; height: auto; display: block; }
-.tier.is-top { background: var(--linen); color: var(--spruce-deep); border-color: var(--linen); }
-.tier-arrow { color: var(--paper-on-dark); font-size: 0.8125rem; }
+.index-card p { font-size: var(--size-small); color: var(--pencil); }
+.index-card .hand { font-size: 1.05rem; line-height: 1.7; color: var(--ink); background: repeating-linear-gradient(to bottom, transparent 0 calc(1.7em - 1px), var(--hairline) calc(1.7em - 1px) 1.7em); }
+
+.tier-row { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.875rem; }
+.tier-row .stamp { transform: rotate(-5deg); }
+.tier-row .stamp:nth-child(2) { transform: rotate(4deg); }
+.tier-arrow { color: var(--pencil); font-family: var(--font-mono); font-size: 0.75rem; }
+
+@media (max-width: 780px) { .trust-grid { grid-template-columns: 1fr; } }
 
 /* --- For shops ---------------------------------------------------------------- */
 
@@ -309,54 +296,36 @@
   gap: clamp(2rem, 5vw, 4.5rem);
   align-items: center;
 }
-
 .shops-copy { display: flex; flex-direction: column; gap: 1.375rem; align-items: flex-start; }
+.shops-copy > p { color: var(--pencil); }
 
 .shops-points { display: flex; flex-direction: column; gap: 1rem; list-style: none; }
-.shops-points li { display: flex; gap: 0.75rem; font-size: var(--size-small); color: var(--paper-on-dark); }
-.shops-points strong { color: var(--linen); font-weight: 600; }
-.point-mark { color: var(--cobalt); flex: none; transform: translateY(1px); }
-.band .point-mark { color: #7C90F2; }   /* cobalt lifted for dark ground */
+.shops-points li { display: flex; gap: 0.75rem; font-size: var(--size-small); color: var(--pencil); }
+.shops-points strong { color: var(--ink); font-weight: 500; }
+.point-mark { flex: none; width: 10px; height: 10px; margin-top: 0.4em; border-radius: 2px; background: var(--paper); border: 1px solid var(--ink); position: relative; }
+.point-mark::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--ink); }
 
-/* The night-math receipt — mono, tabular, scorepad voice */
-.receipt {
-  background: rgba(245, 242, 236, 0.06);
-  border: 1px solid var(--hairline-light);
+/* The shop's page, as a page: a taped print, the shelf, the week */
+.shop-page { padding: 1.25rem; display: flex; flex-direction: column; gap: 0.875rem; }
+.shop-page .print { width: 46%; align-self: flex-start; transform: rotate(-1.5deg); }
+.shop-page h3 { font-size: 1.5rem; }
+.shop-page .chip-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.week-row {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  background: var(--paper-shade);
   border-radius: var(--radius-card);
-  padding: clamp(1.25rem, 3vw, 2rem);
-  font-family: var(--font-mono);
   font-size: 0.9375rem;
-  font-variant-numeric: tabular-nums;
-  color: var(--linen);
 }
-.receipt-title {
-  font-size: 0.75rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--paper-on-dark);
-  margin-bottom: 1.25rem;
-}
-.receipt-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-block: 0.5rem;
-}
-.receipt-row + .receipt-row { border-top: 1px dashed var(--hairline-light); }
-.receipt-row.is-total { border-top: 1px solid var(--linen); font-weight: 700; }
-.receipt-note {
-  margin-top: 1.25rem;
-  font-size: 0.8125rem;
-  color: var(--paper-on-dark);
-  font-family: var(--font-body);
-}
+.week-row .night-caption { margin: 0; }
+.week-row .grow { flex: 1; }
+.week-row .btn { padding: 0.35rem 0.8rem; font-size: 0.8125rem; pointer-events: none; }
 
 @media (max-width: 860px) { .shops-grid { grid-template-columns: 1fr; } }
 
-/* --- Pilot ---------------------------------------------------------------------- */
+/* --- Sessions (with the neighbourhood underneath) --------------------------------- */
 
 .pilot { position: relative; }
-
 .pilot .wrap {
   position: relative;
   z-index: 1;
@@ -364,12 +333,9 @@
   flex-direction: column;
   gap: clamp(1.5rem, 3vw, 2.5rem);
 }
-
-/* The wrap's gap handles spacing here — the head's own margin would double it */
 .pilot .section-head { margin-bottom: 0; }
 
-/* Neighborhood map underlay — faint streets and hex pins, edges
-   feathered so it reads as texture, not a widget. */
+/* The chart, in the app's paint: kraft ground, ink roads, faded-teal water */
 .pilot-map {
   position: absolute;
   inset: 0;
@@ -379,75 +345,24 @@
   mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 85%, transparent);
 }
 .pilot-map svg { width: 100%; height: 100%; display: block; }
-
 .map-label {
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.12em;
-  fill: var(--stone);
+  fill: rgba(42,37,32,0.6);
 }
-
 @media (max-width: 720px) { .pilot-map { display: none; } }
 
-/* Session picker — faithful still of the app's join flow */
-
-.session-card {
-  width: min(100%, 27rem);
+/* The week — three night cards, the way the dock lists them */
+.week {
+  width: min(100%, 28rem);
   margin-inline: auto;
-  padding: var(--gutter);
   display: flex;
   flex-direction: column;
-  gap: 0.625rem;
+  gap: 1.25rem;
 }
-
-.session-card .dock-label { margin-bottom: 0.25rem; }
-
-.session-week {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--stone);
-}
-
-.session-row {
-  display: flex;
-  align-items: center;
-  gap: 0.875rem;
-  padding: 0.75rem 0.875rem;
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius-field);
-}
-.session-row.is-selected { border-color: var(--cobalt); box-shadow: 0 0 0 1px var(--cobalt); }
-
-.session-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin-right: auto;
-  min-width: 0;
-}
-.session-shop { font-weight: 600; font-size: 0.9375rem; }
-.session-meta { font-size: 0.8125rem; color: var(--stone); white-space: nowrap; }
-
-.session-join {
-  padding: 0.4rem 1rem;
-  font-size: 0.8125rem;
-  pointer-events: none;          /* a prop, not a control */
-}
-
-.session-full {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--stone);
-  /* letter-spacing also trails the LAST glyph, so the label sits 0.07em
-     left of centre. Take that 0.14em back off the right padding. */
-  padding: 0.4rem calc(0.625rem - 0.14em) 0.4rem 0.625rem;
-}
-
-.session-card .dock-hint { text-align: center; margin-top: 0.375rem; }
+.week .night-card { padding: 0.875rem 1rem; }
+.week .hint { text-align: center; font-size: 0.8125rem; color: var(--pencil); }
 
 /* --- Closing CTA ------------------------------------------------------------------ */
 
@@ -458,22 +373,12 @@
   text-align: center;
   gap: 1.25rem;
 }
-
-.store-badges {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-top: 0.5rem;
-}
+.store-badges { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; }
 .store-badges img { height: 3.375rem; width: auto; display: block; }
 
 /* --- Footer -------------------------------------------------------------------------- */
 
-.site-footer {
-  border-top: 1px solid var(--hairline);
-  padding-block: 2.5rem;
-}
+.site-footer { border-top: 1px solid var(--hairline); padding-block: 2.5rem; }
 .site-footer .wrap {
   display: flex;
   justify-content: space-between;
@@ -481,5 +386,4 @@
   gap: 1rem;
   flex-wrap: wrap;
 }
-.site-footer small { color: var(--stone); font-size: 0.8125rem; }
-.site-footer .store-legal { flex-basis: 100%; font-size: 0.6875rem; }
+.site-footer small { color: var(--pencil); font-size: 0.8125rem; }

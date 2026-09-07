@@ -1,25 +1,30 @@
 /* BORD site — design tokens
-   Source of truth: VISION.md §6 "scorepad" + ios/Bord/Theme.swift.
-   Linen paper, warm ink, cobalt as the ONLY interactive accent,
-   spruce reserved for trust/positive, hairlines over heavy borders. */
+   Source of truth: ios/Bord/Theme.swift, "the album" (DECISIONS.md
+   2026-09-07). Raw kraft cardstock as the ground, white paper for anything
+   that carries content, fine-liner black for text and the one call to
+   action, ink blue for "yours" and links, rubber-stamp red only inside a
+   stamp. Colour otherwise comes from the photographs. */
 
 :root {
   /* Palette */
-  --linen:    #F5F2EC;
-  --ink:      #1A1714;
-  --card:     #FFFFFF;
-  --stone:    #8A837A;
-  --cobalt:   #2743D6;
-  --cobalt-deep: #1F36AE;      /* hover only */
-  --spruce:   #275D43;
-  --spruce-deep: #1E4A35;      /* trust band ground */
-  --hairline: rgba(0, 0, 0, 0.08);
-  --hairline-light: rgba(255, 255, 255, 0.16);
-  --paper-on-dark: rgba(245, 242, 236, 0.72);  /* stone-equivalent on ink/spruce */
+  --kraft:       #C6A97E;                      /* Theme.linen — the ground */
+  --kraft-deep:  #A78C65;                      /* photo corners, the table */
+  --paper:       #FDFCF9;                      /* Theme.card */
+  --paper-shade: #F2F0EA;                      /* a photo well, a quiet block */
+  --ink:         #2A2520;                      /* fine-liner black */
+  --pencil:      rgba(42, 37, 32, 0.60);       /* secondary text */
+  --blue:        #35558A;                      /* Theme.cobalt — ink blue */
+  --blue-deep:   #2B4672;                      /* hover only */
+  --stamp:       #B8443A;                      /* Theme.flag — stamps only */
+  --hairline:    rgba(42, 37, 32, 0.16);
+  --lift:        rgba(42, 37, 32, 0.10);       /* the whole shadow budget */
+  --tape:        rgba(255, 255, 255, 0.55);    /* washi */
+  --tape-blue:   rgba(53, 85, 138, 0.26);      /* the strip that marks yours */
 
-  /* Type — mirrors the app's three roles: New York serif (display),
-     SF Pro (UI), SF Mono (scorepad utility). Web fallbacks load in
-     index.html; Apple devices render the native faces first. */
+  /* Type — the app's three roles: New York (display), SF Pro (UI),
+     SF Mono (eyebrows, captions, codes). Web fallbacks load in index.html;
+     Apple devices render the native faces first. Handwriting is New York
+     italic, never a novelty face. */
   --font-display: ui-serif, "New York", "Source Serif 4", Georgia, serif;
   --font-body: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
   --font-mono: ui-monospace, "SF Mono", "IBM Plex Mono", Menlo, monospace;
@@ -29,12 +34,13 @@
   --size-h3:      1.25rem;
   --size-body:    1.0625rem;                          /* 17 — app body size */
   --size-small:   0.9375rem;
-  --size-label:   0.8125rem;                          /* mono eyebrows/stats */
+  --size-label:   0.75rem;                            /* mono eyebrows */
 
-  /* Surfaces — the app's exact card recipe */
-  --radius-card:  22px;
-  --radius-field: 16px;
-  --shadow-card:  0 6px 14px rgba(0, 0, 0, 0.05);
+  /* Surfaces — paper has square-ish corners; only buttons round */
+  --radius-card:   3px;
+  --radius-field:  6px;
+  --radius-button: 10px;
+  --shadow-card:   0 1px 2px var(--lift);
 
   /* Rhythm */
   --gutter:       20px;
@@ -44,5 +50,4 @@
   /* Motion — felt, not seen */
   --hover:  180ms ease;
   --reveal: 520ms cubic-bezier(0.22, 0.61, 0.36, 1);
-  --header-fade: 450ms ease;   /* header taking on the passing panel's color */
 }

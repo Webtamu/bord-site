@@ -2,18 +2,20 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* Paper everywhere: the canvas itself is linen so overscroll and any
+/* Cardstock everywhere: the canvas itself is kraft so overscroll and any
    accidental overflow can never show a host/UA dark background, and
-   color-scheme keeps UA chrome (scrollbars, form controls) light. */
+   color-scheme keeps UA chrome (scrollbars, form controls) light. The
+   fiber tile is the only texture — flat colour, no gradient, no vignette. */
 html {
   scroll-behavior: smooth;
-  background: var(--linen);
+  background: var(--kraft);
   color-scheme: light;
   scrollbar-gutter: stable;
 }
 
 body {
-  background: var(--linen);
+  background: var(--kraft) url("../img/fiber.svg") repeat;
+  background-size: 360px 360px;
   overflow-x: clip;   /* clip, not hidden — keeps position:sticky working */
   color: var(--ink);
   font-family: var(--font-body);
@@ -27,61 +29,90 @@ img, svg { display: block; max-width: 100%; }
 
 a { color: inherit; text-decoration: none; }
 
-::selection { background: var(--cobalt); color: #fff; }
+::selection { background: var(--blue); color: var(--paper); }
 
 /* --- Type roles ------------------------------------------------------- */
 
 .display {
   font-family: var(--font-display);
-  font-weight: 500;                 /* Hinge move: elegance from weight restraint */
-  line-height: 1.12;
-  letter-spacing: -0.01em;
+  font-weight: 400;                 /* the serif at regular weight — thin, elegant */
+  line-height: 1.1;
+  letter-spacing: -0.005em;
   text-wrap: balance;
 }
 
 h1.display { font-size: var(--size-hero); }
 h2.display { font-size: var(--size-h2); }
-h3.display { font-size: var(--size-h3); font-weight: 600; }
+h3.display { font-size: var(--size-h3); font-weight: 500; }
+
+/* The scribble under a page title — a pencil line, drawn once. */
+.underlined {
+  position: relative;
+  display: inline-block;
+}
+.underlined::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 4%;
+  bottom: -0.08em;
+  height: 0.12em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'%3E%3Cpath d='M0 4 C36 0 68 8 100 5 S164 1 200 3' fill='none' stroke='%232A2520' stroke-width='1.6' stroke-linecap='round' opacity='0.75'/%3E%3C/svg%3E") no-repeat;
+  background-size: 100% 100%;
+}
 
 .eyebrow {
   font-family: var(--font-mono);
   font-size: var(--size-label);
-  font-weight: 500;
-  letter-spacing: 0.14em;
+  font-weight: 400;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--stone);
+  color: var(--pencil);
 }
 
-.lede { font-size: var(--size-body); color: var(--stone); max-width: 34em; }
+.lede { font-size: var(--size-body); color: var(--pencil); max-width: 34em; }
 
 .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 
-/* --- Wordmark — B⬡RD, ported from the app (LaunchView.BordWordmark):
-       bold serif letters, cobalt rounded hex as the O ------------------- */
-
-.wordmark {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.09em;
+/* Handwriting — the caption under a print, the note on the kraft */
+.hand {
   font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: 0.01em;
+  font-style: italic;
+  font-weight: 400;
   color: var(--ink);
 }
 
-.wm-hex {
-  width: 0.78em;
-  height: 0.78em;
-  transform: translateY(0.02em);
-  flex: none;
+/* --- Wordmark — b⬡rd, ported from the app (LaunchView.WordmarkMetrics):
+       serif letters at regular weight, the ink-blue hex as the o.
+       The hex is sized to New York's measured lowercase o — ink 0.508em
+       tall, hung 0.011em under the baseline — and the two gaps are the
+       measured b→o / o→r ink gaps pulled in for the hex's flat sides. */
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--ink);
+  white-space: nowrap;
 }
 
-/* Direct path rule, literal color: host-page resets (artifact viewers,
+.wm-hex {
+  display: inline-block;
+  /* frame = ink / 0.9466 (a rounded vertex stops short of its corner);
+     width = frame × √3⁄2, with the viewBox cropped to the ink so the
+     dead space beside a pointy-top hexagon isn't read as letterspacing */
+  height: 0.537em;
+  width: 0.465em;
+  vertical-align: -0.025em;      /* undershoot (0.011) + the vertex shortfall (0.014) */
+  margin-left: 0.042em;
+  margin-right: 0.0205em;
+}
+
+/* Direct path rule, literal colour: host-page resets (artifact viewers,
    reader modes) that style `path`/`svg` beat INHERITED fill, and a path
    whose fill resolves to nothing renders BLACK. Never let the brand hex
    depend on inheritance or a custom property. */
-.wm-hex path { fill: #2743D6 !important; }
+.wm-hex path { fill: #35558A !important; }
 
 /* --- Layout ------------------------------------------------------------ */
 
@@ -93,124 +124,152 @@ h3.display { font-size: var(--size-h3); font-weight: 600; }
 
 section { padding-block: var(--section-pad); }
 
-/* --- Card — the app's exact recipe ------------------------------------- */
+/* --- Paper — the app's card: white, square-ish, a one-point lift ------- */
 
-.card {
-  background: var(--card);
-  border: 1px solid var(--hairline);
+.paper {
+  position: relative;
+  background: var(--paper);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
 }
 
-/* --- Buttons — capsules, like the app ----------------------------------- */
+/* Deterministic lean — never more than 0.6° on anything carrying text */
+.lean-l { transform: rotate(-0.5deg); }
+.lean-r { transform: rotate(0.45deg); }
+
+/* A strip of washi over the top edge, a hair off centre */
+.taped::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 47%;
+  width: 56px;
+  height: 16px;
+  transform: translateX(-50%) rotate(-6deg);
+  background: var(--tape);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
+}
+.taped.tape-r::before { left: 53%; transform: translateX(-50%) rotate(5deg); }
+.taped.tape-blue::before { background: var(--tape-blue); }
+
+/* Kraft photo corners — for the things that stay up (the stamp card) */
+.cornered::before,
+.cornered::after,
+.cornered > .corner-b::before,
+.cornered > .corner-b::after {
+  content: "";
+  position: absolute;
+  width: 0; height: 0;
+  border-style: solid;
+  border-color: transparent;
+}
+.cornered::before { top: -1px; left: -1px; border-width: 15px 15px 0 0; border-top-color: var(--kraft-deep); }
+.cornered::after  { top: -1px; right: -1px; border-width: 0 15px 15px 0; border-right-color: var(--kraft-deep); }
+.corner-b { position: absolute; inset: 0; pointer-events: none; }
+.cornered > .corner-b::before { bottom: -1px; left: -1px; border-width: 15px 0 0 15px; border-left-color: var(--kraft-deep); }
+.cornered > .corner-b::after  { bottom: -1px; right: -1px; border-width: 0 0 15px 15px; border-bottom-color: var(--kraft-deep); }
+
+/* --- Buttons — the pen on the page ------------------------------------- */
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  /* justify-content centers the label BOX; text-align centers the lines
-     inside it. Both are needed — a label that wraps (long CTA, narrow
-     phone, large system font) would otherwise sit left-ragged. */
   text-align: center;
   gap: 0.5rem;
   font-family: var(--font-body);
   font-size: 1rem;
-  font-weight: 600;
-  padding: 0.9375rem 1.75rem;
-  border-radius: 999px;
-  /* Transparent, not none: the ghost variants carry a 1.2px border, and
-     these buttons are shrink-to-fit, so border-box sizing does not absorb
-     it. Without a matching border the primary renders 2.4px shorter and
-     narrower — visible where the two sit side by side (hero CTAs, the
-     session rows). Reserving the border keeps every variant identical. */
-  border: 1.2px solid transparent;
+  font-weight: 500;
+  padding: 0.875rem 1.625rem;
+  border-radius: var(--radius-button);
+  border: 1.1px solid transparent;
   cursor: pointer;
   transition: background var(--hover), border-color var(--hover),
-              color var(--hover), transform var(--hover);
+              color var(--hover), transform var(--hover), opacity var(--hover);
 }
 .btn:active { transform: scale(0.98); }   /* app's press discipline */
 
-.btn-primary { background: var(--cobalt); color: #fff; }
-.btn-primary:hover { background: var(--cobalt-deep); }
+/* the one call to action: fine-liner black */
+.btn-primary { background: var(--ink); color: var(--paper); }
+.btn-primary:hover { opacity: 0.88; }
 
+/* the quiet outline — the list Join */
 .btn-ghost {
   background: transparent;
   color: var(--ink);
-  border: 1.2px solid rgba(26, 23, 20, 0.25);
-  font-weight: 500;
+  border-color: rgba(42, 37, 32, 0.7);
 }
-.btn-ghost:hover { border-color: var(--ink); }
+.btn-ghost:hover { border-color: var(--ink); background: rgba(255,255,255,0.35); }
 
-.btn-ghost-light {
-  background: transparent;
-  color: var(--linen);
-  border: 1.2px solid var(--hairline-light);
-  font-weight: 500;
-}
-.btn-ghost-light:hover { border-color: var(--linen); }
+/* the text button */
+.btn-text { background: transparent; color: var(--ink); opacity: 0.85; padding-inline: 0.5rem; }
+.btn-text:hover { opacity: 1; }
 
 .btn:focus-visible,
 a:focus-visible {
-  outline: 2px solid var(--cobalt);
+  outline: 2px solid var(--blue);
   outline-offset: 3px;
 }
 
-/* Optical vertical centering of pill labels.
-   align-items:center centers the LINE BOX, not the letters. Inside that
-   box the baseline sits per the font's ascent/descent, which are not
-   symmetric about the cap band, so the label drifts by
-   (descent - (ascent - capHeight)) / 2. That error is independent of
-   line-height and padding — no padding tuning removes it, and its size
-   and direction change with whichever face actually resolves from
-   -apple-system / Inter / Segoe UI.
-
-   Trimming the label box to capHeight..baseline makes the box edges
-   follow the letters instead of the font's metrics, so symmetric padding
-   centers correctly in any face. The trim needs a block container, which
-   is why labels are wrapped in .lbl — the pills stay flex, so icon
-   siblings (the laurel on the Trusted tier) are unaffected.
-
-   Trimming removes (line-height - capHeight) ~= 0.83em, so half goes
-   back on each side to preserve current pill heights. Browsers without
-   text-box support fall through to exactly today's rendering. */
+/* Optical vertical centring of labels — see the note in the app's
+   button style; symmetric padding centres in any face once the label box
+   is trimmed to cap height. */
 @supports (text-box: trim-both cap alphabetic) {
   .btn > .lbl,
-  .chip > .lbl,
-  .tier > .lbl {
+  .chip > .lbl {
     display: block;
     text-box: trim-both cap alphabetic;
     padding-block: 0.415em;
   }
 }
 
-/* --- Chips — capsules, cobalt only when selected ------------------------ */
+/* --- Chips — the shelf's paper tags -------------------------------------- */
 
 .chip {
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 500;
-  padding: 0.5rem 0.875rem;
-  border-radius: 999px;
-  background: var(--card);
-  border: 1px solid var(--hairline);
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--radius-card);
+  background: var(--paper);
+  box-shadow: var(--shadow-card);
   color: var(--ink);
   white-space: nowrap;
 }
-.chip.is-selected { background: var(--cobalt); border-color: var(--cobalt); color: #fff; }
+.chip::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--kraft); }
+
+/* --- Rubber stamp ---------------------------------------------------------- */
+
+.stamp {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stamp);
+  padding: 0.22em 0.7em;
+  border: 1.5px solid var(--stamp);
+  border-radius: 3px;
+  box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px var(--stamp);
+  opacity: 0.88;
+  transform: rotate(-7deg);
+}
+.stamp.is-pencil { color: var(--pencil); border-color: var(--pencil); box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px var(--pencil); }
 
 /* --- Scroll reveal — opacity + 8px rise, the app's entrance grammar ----- */
 
 [data-reveal] {
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity var(--reveal), transform var(--reveal);
+  translate: 0 8px;
+  transition: opacity var(--reveal), translate var(--reveal);
 }
-[data-reveal].is-visible { opacity: 1; transform: none; }
+[data-reveal].is-visible { opacity: 1; translate: none; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  [data-reveal] { opacity: 1; translate: none; transition: none; }
   .pulse-dot::after { animation: none; }
 }
