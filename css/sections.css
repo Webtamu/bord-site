@@ -62,7 +62,7 @@
 
 .hero .wrap {
   display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  grid-template-columns: minmax(0, 6.5fr) minmax(0, 5.5fr);
   gap: clamp(2rem, 5vw, 4.5rem);
   align-items: center;
 }
@@ -100,13 +100,20 @@
   to   { transform: scale(2.6); opacity: 0; }
 }
 
-/* The album spread: a taped print, a night card, a stamp — laid on the
-   kraft the way the app's Nights page lays them. */
-.hero-visual { position: relative; min-height: 28rem; }
+/* The album spread: a taped print and a night card, laid on the kraft
+   the way the app's Nights page lays them. A grid, not absolute
+   positioning, so the spread has real height and can never spill past
+   its column: the card sits top-right, the print tucks under its corner. */
+.hero-visual {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: auto auto;
+  align-items: start;
+}
 
 .print {
   position: relative;
-  display: inline-block;
+  display: block;
   background: var(--paper);
   padding: 5%;
   box-shadow: var(--shadow-card);
@@ -117,39 +124,42 @@
   background: #B49E82;
 }
 .print .well svg { width: 100%; height: 100%; }
-.print-caption { margin-top: 0.4rem; font-size: 1.05rem; }
+.print-caption { margin-top: 0.4rem; font-size: 1.05rem; white-space: nowrap; }
 
 .hero-print {
-  position: absolute;
-  top: 0; left: 0;
-  width: 54%;
+  position: relative;
+  grid-column: 1 / 8;
+  grid-row: 1 / 3;
+  margin-top: 6.25rem;
   transform: rotate(-2deg);
 }
+.hero-print .print::before { left: 20%; }
 .hero-print .stamp {
   position: absolute;
-  right: -14%;
-  top: -6%;
+  right: -9%;
+  bottom: 15%;
   font-size: 0.875rem;
   transform: rotate(-10deg);
 }
-.hero-print .print { width: 100%; }
 
 /* The night card — the app's session card, faithfully */
 .night-card {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 0.875rem;
   align-items: start;
   padding: 0.875rem;
   width: 100%;
 }
+.night-card > div { min-width: 0; }
 .hero-card {
-  position: absolute;
-  right: 0; bottom: 0;
-  width: 82%;
+  grid-column: 2 / 13;
+  grid-row: 1;
+  z-index: 1;
+  margin-top: 1rem;
 }
 .night-name { font-weight: 500; font-size: 1.0625rem; }
-.night-meta { font-size: 0.8125rem; color: rgba(42,37,32,0.75); margin-top: 1px; white-space: nowrap; }
+.night-meta { font-size: 0.8125rem; color: rgba(42,37,32,0.75); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .night-caption {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
@@ -157,7 +167,6 @@
   text-transform: uppercase;
   color: rgba(42,37,32,0.72);
   margin-top: 0.3rem;
-  white-space: nowrap;
 }
 .night-card .btn { padding: 0.45rem 0.9rem; font-size: 0.875rem; pointer-events: none; }
 
@@ -197,16 +206,33 @@
 .seats .table { grid-column: 1 / -1; height: 2px; width: 22px; background: rgba(42,37,32,0.55); border-radius: 1px; margin-inline: -3px; }
 .seat { width: 6px; height: 6px; border-radius: 1.5px; border: 1px solid rgba(42,37,32,0.4); }
 .seat.is-taken { background: var(--ink); border-color: var(--ink); }
-.seats-row { display: flex; align-items: center; gap: 0.6rem; }
+.seats-row { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
 
 /* Long table: one row of chairs */
 .seats.long { grid-template-columns: repeat(12, 6px); gap: 4px; }
 .seats.long .table { display: none; }
 
 
+/* One column: the copy centres, and the spread stacks — card first,
+   the print centred beneath it, no overlap to clip. */
 @media (max-width: 860px) {
-  .hero .wrap { grid-template-columns: 1fr; }
-  .hero-visual { max-width: 26rem; margin-top: 1rem; }
+  .hero .wrap { grid-template-columns: 1fr; justify-items: center; }
+  .hero-copy { align-items: center; text-align: center; }
+  .hero-ctas { justify-content: center; }
+  .hero-visual {
+    width: min(100%, 26rem);
+    margin-top: 1.5rem;
+    row-gap: 1.75rem;
+  }
+  .hero-card { grid-column: 1 / -1; grid-row: 1; margin-top: 0; }
+  .hero-print {
+    grid-column: 4 / 10;
+    grid-row: 2;
+    margin-top: 0;
+    text-align: center;
+  }
+  .hero-print .print::before { left: 47%; }
+  .hero-print .stamp { right: -16%; bottom: 22%; }
 }
 
 /* --- Section heads --------------------------------------------------------- */
@@ -307,21 +333,35 @@
 
 /* The shop's page, as a page: a taped print, the shelf, the week */
 .shop-page { padding: 1.25rem; display: flex; flex-direction: column; gap: 0.875rem; }
-.shop-page .print { width: 46%; align-self: flex-start; transform: rotate(-1.5deg); }
+.shop-page .print {
+  width: 46%;
+  align-self: flex-start;
+  transform: rotate(-1.5deg);
+  box-shadow: var(--shadow-card), 0 0 0 1px var(--hairline);
+}
+.shop-page .print::before { background: rgba(198, 169, 126, 0.45); }
 .shop-page h3 { font-size: 1.5rem; }
 .shop-page .chip-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 .week-row {
-  display: flex; align-items: center; gap: 0.75rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 0.25rem 0.75rem;
   padding: 0.625rem 0.75rem;
   background: var(--paper-shade);
   border-radius: var(--radius-card);
   font-size: 0.9375rem;
 }
 .week-row .night-caption { margin: 0; }
-.week-row .grow { flex: 1; }
+.week-row .grow { white-space: nowrap; }
 .week-row .btn { padding: 0.35rem 0.8rem; font-size: 0.8125rem; pointer-events: none; }
 
 @media (max-width: 860px) { .shops-grid { grid-template-columns: 1fr; } }
+@media (max-width: 480px) {
+  .week-row { grid-template-columns: minmax(0, 1fr) auto; }
+  .week-row .night-caption { grid-column: 1; }
+  .week-row .btn { grid-column: 2; grid-row: 1 / 3; }
+}
 
 /* --- Sessions (with the neighbourhood underneath) --------------------------------- */
 
@@ -333,7 +373,12 @@
   flex-direction: column;
   gap: clamp(1.5rem, 3vw, 2.5rem);
 }
-.pilot .section-head { margin-bottom: 0; }
+.pilot .section-head {
+  margin-bottom: 0;
+  margin-inline: auto;
+  align-items: center;
+  text-align: center;
+}
 
 /* The chart, in the app's paint: kraft ground, ink roads, faded-teal water */
 .pilot-map {
@@ -351,7 +396,9 @@
   letter-spacing: 0.12em;
   fill: rgba(42,37,32,0.6);
 }
-@media (max-width: 720px) { .pilot-map { display: none; } }
+/* Below this the content column spans the map and the pins would land on
+   the copy, so the chart comes out. */
+@media (max-width: 1000px) { .pilot-map { display: none; } }
 
 /* The week — three night cards, the way the dock lists them */
 .week {
