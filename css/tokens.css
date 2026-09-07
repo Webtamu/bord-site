@@ -1,53 +1,66 @@
-/* BORD site — design tokens
-   Source of truth: ios/Bord/Theme.swift, "the album" (DECISIONS.md
-   2026-09-07). Raw kraft cardstock as the ground, white paper for anything
-   that carries content, fine-liner black for text and the one call to
-   action, ink blue for "yours" and links, rubber-stamp red only inside a
-   stamp. Colour otherwise comes from the photographs. */
+/* BORD site — design tokens · SCRAPBOOK (#9)
+   Source of truth: ios/Bord/Prototypes/ProtoScrapbook.swift (the original
+   concept) read through Skin.scrapbook in Prototypes/Polished/ (the
+   polished pass). The nights you keep: kraft paper, polaroids taped down at
+   angles, sticky notes, real handwriting, gold star stickers. The album IS
+   the karma — a kept night is a photo, a flaked night is a gap on the page.
+   Bord is a die-cut sticker. */
 
 :root {
-  /* Palette */
-  --kraft:       #C6A97E;                      /* Theme.linen — the ground */
-  --kraft-deep:  #A78C65;                      /* photo corners, the table */
-  --paper:       #FDFCF9;                      /* Theme.card */
-  --paper-shade: #F2F0EA;                      /* a photo well, a quiet block */
-  --ink:         #2A2520;                      /* fine-liner black */
-  --pencil:      rgba(42, 37, 32, 0.60);       /* secondary text */
-  --blue:        #35558A;                      /* Theme.cobalt — ink blue */
-  --blue-deep:   #2B4672;                      /* hover only */
-  --stamp:       #B8443A;                      /* Theme.flag — stamps only */
-  --hairline:    rgba(42, 37, 32, 0.16);
-  --lift:        rgba(42, 37, 32, 0.10);       /* the whole shadow budget */
-  --tape:        rgba(255, 255, 255, 0.55);    /* washi */
-  --tape-blue:   rgba(53, 85, 138, 0.26);      /* the strip that marks yours */
+  /* Palette — Skin.scrapbook */
+  --kraft:       #DECBA9;                      /* bg  · rgb(.871 .796 .663) */
+  --kraft-hi:    #E7D7B9;                      /* the original's gradient top */
+  --paper:       #FCFAF5;                      /* surface · the polaroid white */
+  --ink:         #3D2F21;                      /* walnut ink · rgb(.239 .184 .129) */
+  --muted:       rgba(61, 47, 33, 0.60);
+  --pen:         #2B355D;                      /* ballpoint blue · the accent */
+  --positive:    #5C8F66;
+  --flag:        #C74A38;
+  --hairline:    rgba(61, 47, 33, 0.18);
+  --gold:        #EFBF49;                      /* the star sticker */
+  --cobalt:      #2743D6;                      /* the bord sticker's hex */
 
-  /* Type — the app's three roles: New York (display), SF Pro (UI),
-     SF Mono (eyebrows, captions, codes). Web fallbacks load in index.html;
-     Apple devices render the native faces first. Handwriting is New York
-     italic, never a novelty face. */
-  --font-display: ui-serif, "New York", "Source Serif 4", Georgia, serif;
-  --font-body: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
-  --font-mono: ui-monospace, "SF Mono", "IBM Plex Mono", Menlo, monospace;
+  /* pops — photo tints and the sticky note. Never accents. */
+  --photo-blue:  #ADC4D9;
+  --photo-pink:  #E8BDC4;
+  --photo-sage:  #BDCFAB;
+  --photo-peach: #EFCBA8;
+  --sticky:      #FDE57A;
 
-  --size-hero:    clamp(2.625rem, 5.5vw, 4rem);      /* 42 → 64 */
-  --size-h2:      clamp(1.875rem, 3.2vw, 2.5rem);    /* 30 → 40 */
-  --size-h3:      1.25rem;
-  --size-body:    1.0625rem;                          /* 17 — app body size */
+  /* washi */
+  --tape-plain:  rgba(255, 255, 255, 0.42);
+  --tape-pink:   rgba(242, 165, 179, 0.55);
+  --tape-mint:   rgba(161, 212, 179, 0.55);
+
+  /* Type — Marker Felt (display), Noteworthy (body), Bradley Hand (the pen)
+     ship with Apple devices and render first; the Google faces below are the
+     nearest hands for everyone else. Mono is the system's, for codes only. */
+  --font-display: "Marker Felt", "Permanent Marker", "Comic Sans MS", cursive;
+  --font-body: "Noteworthy", "Kalam", "Comic Sans MS", cursive;
+  --font-hand: "Bradley Hand", "Caveat", "Kalam", cursive;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+
+  --size-hero:    clamp(2.5rem, 5.6vw, 4.125rem);
+  --size-h2:      clamp(1.875rem, 3.4vw, 2.625rem);
+  --size-h3:      1.375rem;
+  --size-body:    1.0625rem;
   --size-small:   0.9375rem;
-  --size-label:   0.75rem;                            /* mono eyebrows */
+  --size-label:   0.8125rem;
 
-  /* Surfaces — paper has square-ish corners; only buttons round */
-  --radius-card:   3px;
-  --radius-field:  6px;
-  --radius-button: 10px;
-  --shadow-card:   0 1px 2px var(--lift);
+  /* Surfaces — paper is square; polished-9 allows a 4pt corner on chrome */
+  --radius-card:   0;
+  --radius-chrome: 4px;
+  --shadow-paper:  0 4px 6px rgba(0, 0, 0, 0.18);    /* the polaroid lift */
+  --shadow-note:   0 3px 4px rgba(0, 0, 0, 0.16);    /* the sticky note */
+  --shadow-sticker: 0 2px 2px rgba(61, 47, 33, 0.25);
 
   /* Rhythm */
-  --gutter:       20px;
+  --gutter:       22px;
   --section-pad:  clamp(4.5rem, 9vw, 7.5rem);
-  --content-max:  68.5rem;                            /* 1096px */
+  --content-max:  68.5rem;
 
-  /* Motion — felt, not seen */
-  --hover:  180ms ease;
-  --reveal: 520ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  /* Motion — SB.settle and SB.slap */
+  --hover:   180ms ease;
+  --settle:  520ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  --slap:    420ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }

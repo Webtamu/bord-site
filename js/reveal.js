@@ -11,7 +11,7 @@
   }
 
   function init() {
-  var els = document.querySelectorAll("[data-reveal]");
+  var els = document.querySelectorAll("[data-reveal], [data-slap]");
   if (!("IntersectionObserver" in window)) {
     els.forEach(function (el) { el.classList.add("is-visible"); });
     return;
@@ -26,7 +26,7 @@
           ? el.parentElement.querySelectorAll(":scope > [data-reveal]")
           : [];
         var index = Array.prototype.indexOf.call(siblings, el);
-        el.style.transitionDelay = index > 0 ? index * 70 + "ms" : "";
+        el.style.transitionDelay = index > 0 ? index * (el.hasAttribute("data-slap") ? 160 : 70) + "ms" : "";
         el.classList.add("is-visible");
         observer.unobserve(el);
       });

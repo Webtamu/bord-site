@@ -1,5 +1,5 @@
-/* BORD site — per-section styles, top to bottom.
-   One ground the whole way down: the album has no dark bands. */
+/* BORD site · Scrapbook — per-section styles, top to bottom.
+   One kraft page the whole way down. */
 
 /* --- Header -------------------------------------------------------------- */
 
@@ -7,7 +7,7 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(198, 169, 126, 0.92);   /* kraft */
+  background: rgba(231, 215, 185, 0.9);   /* kraft-hi */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--hairline);
@@ -20,40 +20,42 @@
   height: 4.25rem;
 }
 
+/* The wordmark: the sticker, then the name in marker. On scroll the name
+   tucks away and the sticker stands alone. */
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  color: var(--ink);
+  white-space: nowrap;
+  line-height: 1;
+}
+.wordmark .sticker { transform: rotate(8deg); }
+.wm-word {
+  display: inline-block;
+  overflow: clip;
+  max-width: 4em;
+  transition: max-width 420ms cubic-bezier(0.22, 0.61, 0.36, 1), opacity 260ms ease;
+}
+.site-header.is-collapsed .wm-word { max-width: 0; opacity: 0; }
+
 .site-nav {
   display: flex;
   gap: 1.75rem;
   margin-left: auto;
-  font-size: var(--size-small);
-  font-weight: 500;
-  color: var(--pencil);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1.0625rem;
+  color: var(--muted);
 }
 .site-nav a { transition: color var(--hover); }
-.site-nav a:hover { color: var(--ink); }
-
-.site-header .btn { padding: 0.5rem 1.125rem; font-size: 0.875rem; }
-
-/* Wordmark collapse — scrolled down, b and rd tuck away so the hex
-   stands alone; back at the top the full b⬡rd returns. */
-.site-header .wm-letter {
-  display: inline-block;
-  overflow: clip;            /* clip, not hidden — hidden moves an inline-block's baseline to its bottom edge */
-  max-width: 2.5em;
-  vertical-align: baseline;
-}
-.site-header.is-collapsed .wm-letter { max-width: 0; opacity: 0; }
-.site-header.is-collapsed .wm-hex { margin: 0; }
-@media (prefers-reduced-motion: no-preference) {
-  .site-header .wm-letter {
-    transition: max-width 420ms cubic-bezier(0.22, 0.61, 0.36, 1),
-                opacity 260ms ease;
-  }
-  .site-header .wm-hex { transition: margin 420ms cubic-bezier(0.22, 0.61, 0.36, 1); }
-}
+.site-nav a:hover { color: var(--pen); }
 
 @media (max-width: 720px) {
   .site-nav { display: none; }
-  .site-header .btn { margin-left: auto; }
+  .site-header .sticky { margin-left: auto; }
 }
 
 /* --- Hero ------------------------------------------------------------------ */
@@ -62,37 +64,33 @@
 
 .hero .wrap {
   display: grid;
-  grid-template-columns: minmax(0, 6.5fr) minmax(0, 5.5fr);
-  gap: clamp(2rem, 5vw, 4.5rem);
+  grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+  gap: clamp(2rem, 5vw, 4rem);
   align-items: center;
 }
 
 .hero-copy { display: flex; flex-direction: column; gap: 1.375rem; align-items: flex-start; }
-.hero-copy .lede { font-size: 1.125rem; }
-.hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.hero-copy h1 { transform: rotate(-1deg); transform-origin: left bottom; }
+.hero-ctas { display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap; }
 
-/* Live line — the page's single ambient loop */
 .live-line {
   display: inline-flex;
   align-items: center;
   gap: 0.625rem;
-  font-family: var(--font-mono);
-  font-size: var(--size-label);
-  letter-spacing: 0.08em;
-  color: var(--pencil);
+  font-size: 1.125rem;
 }
 .pulse-dot {
   position: relative;
-  width: 8px; height: 8px;
+  width: 9px; height: 9px;
   border-radius: 50%;
-  background: var(--blue);
+  background: var(--pen);
   flex: none;
 }
 .pulse-dot::after {
   content: "";
   position: absolute; inset: 0;
   border-radius: 50%;
-  background: var(--blue);
+  background: var(--pen);
   animation: ping 1.5s ease-out infinite;
 }
 @keyframes ping {
@@ -100,139 +98,69 @@
   to   { transform: scale(2.6); opacity: 0; }
 }
 
-/* The album spread: a taped print and a night card, laid on the kraft
-   the way the app's Nights page lays them. A grid, not absolute
-   positioning, so the spread has real height and can never spill past
-   its column: the card sits top-right, the print tucks under its corner. */
-.hero-visual {
+/* Tonight's page: date on top, the crew's polaroids landing on the page,
+   the plan taped under them. */
+.hero-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.page-date {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+.page-date .display { font-size: 2rem; }
+.page-date .hand { font-size: 1.2rem; color: var(--muted); }
+
+.crew {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-template-rows: auto auto;
-  align-items: start;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  padding: 0.75rem 0.25rem 0.25rem;
 }
+.crew .polaroid {
+  width: auto;
+  min-width: 0;
+  margin-inline: -0.2rem;                  /* they overlap like they landed */
+  rotate: var(--a, -3deg);
+}
+.crew .polaroid:nth-child(2) { translate: 0 0.9rem; }
+.crew .polaroid:nth-child(3) { translate: 0 -0.3rem; }
+.crew .polaroid:nth-child(4) { translate: 0 0.6rem; }
+.crew .polaroid .cap { font-size: 0.8rem; height: 2rem; white-space: normal; text-align: center; line-height: 1.05; }
 
-.print {
-  position: relative;
-  display: block;
-  background: var(--paper);
-  padding: 5%;
-  box-shadow: var(--shadow-card);
+.plan {
+  align-self: flex-start;
+  width: min(100%, 22rem);
+  margin-top: 0.75rem;
+  margin-left: 1rem;
+  padding: 1rem 1.25rem 1.1rem;
 }
-.print .well {
-  display: block;
-  aspect-ratio: 1 / 0.92;
-  background: #B49E82;
+.plan-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.35rem;
+  margin-bottom: 0.35rem;
 }
-.print .well svg { width: 100%; height: 100%; }
-.print-caption { margin-top: 0.4rem; font-size: 1.05rem; white-space: nowrap; }
+.plan-title .star { width: 1.25rem; height: 1.25rem; }
+.plan ul { list-style: none; font-size: 1.1rem; }
+.plan li { display: flex; align-items: baseline; gap: 0.5rem; }
+.plan li::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: rgba(43,53,93,0.7); flex: none; }
 
-.hero-print {
-  position: relative;
-  grid-column: 1 / 8;
-  grid-row: 1 / 3;
-  margin-top: 6.25rem;
-  transform: rotate(-2deg);
-}
-.hero-print .print::before { left: 20%; }
-.hero-print .stamp {
-  position: absolute;
-  right: -9%;
-  bottom: 15%;
-  font-size: 0.875rem;
-  transform: rotate(-10deg);
-}
-
-/* The night card — the app's session card, faithfully */
-.night-card {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 0.875rem;
-  align-items: start;
-  padding: 0.875rem;
-  width: 100%;
-}
-.night-card > div { min-width: 0; }
-.hero-card {
-  grid-column: 2 / 13;
-  grid-row: 1;
-  z-index: 1;
-  margin-top: 1rem;
-}
-.night-name { font-weight: 500; font-size: 1.0625rem; }
-.night-meta { font-size: 0.8125rem; color: rgba(42,37,32,0.75); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.night-caption {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(42,37,32,0.72);
-  margin-top: 0.3rem;
-}
-.night-card .btn { padding: 0.45rem 0.9rem; font-size: 0.875rem; pointer-events: none; }
-
-/* A die — white, ink pips, a hair of lean */
-.die {
-  position: relative;
-  width: 30px; height: 30px;
-  background: var(--paper);
-  border: 1.3px solid var(--ink);
-  border-radius: 7px;
-  box-shadow: var(--shadow-card);
-  transform: rotate(-8deg);
-  flex: none;
-}
-.die i {
-  position: absolute;
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--ink);
-  left: 50%; top: 50%;
-  margin: -2.5px 0 0 -2.5px;
-}
-.die i:nth-child(1) { transform: translate(-7px, -7px); }
-.die i:nth-child(2) { transform: translate( 7px,  7px); }
-.die i:nth-child(3) { transform: translate( 7px, -7px); }
-.die i:nth-child(4) { transform: translate(-7px,  7px); }
-.die i:nth-child(5) { transform: translate( 0,    0); }
-.die.d1 i:nth-child(n+2), .die.d2 i:nth-child(n+3), .die.d4 i:nth-child(5) { display: none; }
-
-/* Chairs round a table — the seat glyph */
-.seats {
-  display: grid;
-  grid-template-columns: repeat(2, 6px);
-  gap: 2px 4px;
-  margin-top: 0.35rem;
-}
-.seats .table { grid-column: 1 / -1; height: 2px; width: 22px; background: rgba(42,37,32,0.55); border-radius: 1px; margin-inline: -3px; }
-.seat { width: 6px; height: 6px; border-radius: 1.5px; border: 1px solid rgba(42,37,32,0.4); }
-.seat.is-taken { background: var(--ink); border-color: var(--ink); }
-.seats-row { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
-
-/* Long table: one row of chairs */
-.seats.long { grid-template-columns: repeat(12, 6px); gap: 4px; }
-.seats.long .table { display: none; }
-
-
-/* One column: the copy centres, and the spread stacks — card first,
-   the print centred beneath it, no overlap to clip. */
 @media (max-width: 860px) {
   .hero .wrap { grid-template-columns: 1fr; justify-items: center; }
   .hero-copy { align-items: center; text-align: center; }
+  .hero-copy h1 { transform-origin: center bottom; }
   .hero-ctas { justify-content: center; }
-  .hero-visual {
-    width: min(100%, 26rem);
-    margin-top: 1.5rem;
-    row-gap: 1.75rem;
-  }
-  .hero-card { grid-column: 1 / -1; grid-row: 1; margin-top: 0; }
-  .hero-print {
-    grid-column: 4 / 10;
-    grid-row: 2;
-    margin-top: 0;
-    text-align: center;
-  }
-  .hero-print .print::before { left: 47%; }
-  .hero-print .stamp { right: -16%; bottom: 22%; }
+  .hero-page { width: min(100%, 28rem); margin-top: 1.5rem; }
+  .page-date { justify-content: center; }
+  .plan { align-self: center; margin-left: 0; }
+}
+@media (max-width: 480px) {
+  .crew { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem 0.5rem; }
+  .crew .polaroid { margin-inline: 0.5rem; translate: none !important; }
 }
 
 /* --- Section heads --------------------------------------------------------- */
@@ -240,10 +168,11 @@
 .section-head {
   display: flex;
   flex-direction: column;
-  gap: 0.875rem;
+  gap: 0.75rem;
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
   max-width: 36em;
 }
+.section-head h2 { transform: rotate(-0.8deg); transform-origin: left bottom; }
 
 /* --- How it works ------------------------------------------------------------ */
 
@@ -255,37 +184,47 @@
 }
 
 .step {
-  padding: var(--gutter);
+  padding: 1.5rem var(--gutter) var(--gutter);
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.6rem;
 }
-.step-figure { height: 3.5rem; display: flex; align-items: center; }
-.step p { color: var(--pencil); font-size: var(--size-small); }
+.step-figure { height: 3.5rem; display: flex; align-items: flex-end; gap: 0.75rem; margin-bottom: 0.25rem; }
+.step p { color: rgba(61, 47, 33, 0.78); font-size: var(--size-body); }
+.step .eyebrow { font-size: 1.05rem; }
 
-/* dealt cards around the table, for step two */
-.dealt { display: flex; align-items: center; gap: 6px; }
-.dealt .tile {
-  width: 22px; height: 22px;
+.step-figure .pin:nth-child(1) { rotate: -8deg; }
+.step-figure .pin:nth-child(2) { rotate: 5deg; translate: 0 -6px; }
+.step-figure .pin:nth-child(3) { rotate: -3deg; }
+
+/* mini polaroids landing, for step two */
+.mini-crew { display: flex; align-items: flex-end; }
+.mini-crew i {
+  display: block;
+  width: 28px; height: 32px;
+  margin-right: -6px;
   background: var(--paper);
-  box-shadow: var(--shadow-card);
-  font-family: var(--font-display);
-  font-size: 9px;
-  display: grid; place-items: center;
-  border: 1px solid var(--hairline);
+  box-shadow: 0 2px 3px rgba(0,0,0,0.18);
+  position: relative;
+  rotate: var(--a, 0deg);
 }
-.dealt .tile.you { outline: 2px solid var(--tape-blue); outline-offset: -3px; }
-.dealt .tabletop { width: 40px; height: 18px; background: var(--kraft-deep); border-radius: 5px; border: 1px solid rgba(42,37,32,0.35); }
+.mini-crew i::before {
+  content: "";
+  position: absolute;
+  left: 3px; right: 3px; top: 3px; height: 19px;
+  background: var(--tint, var(--photo-blue));
+}
+.mini-crew i.you { outline: 2px solid var(--pen); outline-offset: -1px; }
 
-/* the stamp card mini, for step three */
-.mini-stamps { display: grid; grid-template-columns: repeat(7, 14px); gap: 5px; }
-.mini-stamps i { width: 14px; height: 14px; border-radius: 50%; border: 1px dashed rgba(42,37,32,0.3); }
-.mini-stamps i.on { border: 1.3px solid var(--stamp); position: relative; opacity: 0.85; }
-.mini-stamps i.on::after { content: ""; position: absolute; width: 3px; height: 3px; border-radius: 50%; background: var(--stamp); left: 50%; top: 50%; margin: -1.5px 0 0 -1.5px; }
+/* the star row, for step three */
+.star-row { display: flex; gap: 0.35rem; }
+.star-row .star { width: 1.6rem; height: 1.6rem; }
+.star-row .star:nth-child(odd) { rotate: -8deg; }
+.star-row .star:nth-child(even) { rotate: 6deg; }
 
 @media (max-width: 780px) { .steps { grid-template-columns: 1fr; } }
 
-/* --- Trust — three index cards ----------------------------------------------- */
+/* --- Trust — index cards and a sticky ----------------------------------------- */
 
 .trust-grid {
   display: grid;
@@ -293,24 +232,84 @@
   gap: var(--gutter);
   align-items: start;
 }
-.index-card { padding: 1rem 1.125rem 1.125rem; }
+.index-card { padding: 1.35rem 1.25rem 1.25rem; }
 .index-card .title {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink);
+  font-size: 1.35rem;
   padding-bottom: 0.4rem;
-  border-bottom: 1.4px dotted rgba(42,37,32,0.5);
+  border-bottom: 1.5px dotted rgba(43, 53, 93, 0.5);
   margin-bottom: 0.75rem;
 }
-.index-card p { font-size: var(--size-small); color: var(--pencil); }
-.index-card .hand { font-size: 1.05rem; line-height: 1.7; color: var(--ink); background: repeating-linear-gradient(to bottom, transparent 0 calc(1.7em - 1px), var(--hairline) calc(1.7em - 1px) 1.7em); }
+.index-card p { font-size: var(--size-small); color: rgba(61, 47, 33, 0.78); }
+.index-card .trust-line {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  font-size: 1.1rem;
+  color: var(--pen);
+  margin-bottom: 0.75rem;
+}
+.index-card .trust-line .star { width: 1.35rem; height: 1.35rem; }
+.dim { color: var(--muted); }
 
-.tier-row { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.875rem; }
-.tier-row .stamp { transform: rotate(-5deg); }
-.tier-row .stamp:nth-child(2) { transform: rotate(4deg); }
-.tier-arrow { color: var(--pencil); font-family: var(--font-mono); font-size: 0.75rem; }
+/* the album, small: photos on a grid, one gap */
+.album-mini {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.5rem;
+  max-width: 20rem;
+  margin: 0.25rem 0 0.9rem;
+}
+.album-mini i {
+  display: block;
+  aspect-ratio: 0.9;
+  background: var(--paper);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  position: relative;
+  rotate: var(--a, 0deg);
+}
+.album-mini i::before {
+  content: "";
+  position: absolute;
+  inset: 3px 3px 7px;
+  background: var(--tint);
+}
+.album-mini i::after {
+  content: "";
+  position: absolute;
+  top: -4px; right: -4px;
+  width: 10px; height: 10px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Cpath d='M13.0,0.0 L16.2,8.6 L25.4,9.0 L18.2,14.7 L20.6,23.5 L13.0,18.5 L5.4,23.5 L7.8,14.7 L0.6,9.0 L9.8,8.6Z' fill='%23EFBF49'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+.album-mini i.gap {
+  background: transparent;
+  box-shadow: none;
+  border: 1px dashed rgba(61, 47, 33, 0.45);
+}
+.album-mini i.gap::before, .album-mini i.gap::after { display: none; }
+
+/* the sticky note as a card */
+.sticky-note {
+  position: relative;
+  background: var(--sticky);
+  padding: 1.35rem 1.25rem 1.5rem;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%);
+  filter: drop-shadow(var(--shadow-note));
+}
+.sticky-note::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent 50%);
+  pointer-events: none;
+}
+.sticky-note::after {
+  content: "";
+  position: absolute; right: 0; bottom: 0;
+  width: 22px; height: 22px;
+  background: linear-gradient(225deg, transparent 50%, rgba(61,47,33,0.18) 50%);
+}
+.sticky-title { font-size: 1.35rem; margin-bottom: 0.4rem; }
+.sticky-note .hand { font-size: 1.2rem; line-height: 1.45; color: var(--ink); }
 
 @media (max-width: 780px) { .trust-grid { grid-template-columns: 1fr; } }
 
@@ -323,47 +322,77 @@
   align-items: center;
 }
 .shops-copy { display: flex; flex-direction: column; gap: 1.375rem; align-items: flex-start; }
-.shops-copy > p { color: var(--pencil); }
+.shops-copy > h2 { transform: rotate(-0.8deg); transform-origin: left bottom; }
+.shops-copy > p { color: rgba(61, 47, 33, 0.78); }
 
-.shops-points { display: flex; flex-direction: column; gap: 1rem; list-style: none; }
-.shops-points li { display: flex; gap: 0.75rem; font-size: var(--size-small); color: var(--pencil); }
-.shops-points strong { color: var(--ink); font-weight: 500; }
-.point-mark { flex: none; width: 10px; height: 10px; margin-top: 0.4em; border-radius: 2px; background: var(--paper); border: 1px solid var(--ink); position: relative; }
-.point-mark::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--ink); }
+.shops-points { display: flex; flex-direction: column; gap: 0.9rem; list-style: none; }
+.shops-points li { display: flex; gap: 0.75rem; font-size: var(--size-small); color: rgba(61, 47, 33, 0.78); }
+.shops-points strong { color: var(--ink); font-weight: 700; }
 
-/* The shop's page, as a page: a taped print, the shelf, the week */
-.shop-page { padding: 1.25rem; display: flex; flex-direction: column; gap: 0.875rem; }
-.shop-page .print {
-  width: 46%;
-  align-self: flex-start;
-  transform: rotate(-1.5deg);
-  box-shadow: var(--shadow-card), 0 0 0 1px var(--hairline);
+/* the pen's checkbox, ticked */
+.check {
+  flex: none;
+  width: 20px; height: 20px;
+  margin-top: 0.1em;
+  border: 2px solid rgba(43, 53, 93, 0.6);
+  border-radius: 4px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M4 10.5 L8.5 15 L17 5' fill='none' stroke='%232B355D' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / 16px;
 }
-.shop-page .print::before { background: rgba(198, 169, 126, 0.45); }
-.shop-page h3 { font-size: 1.5rem; }
-.shop-page .chip-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+/* The shop's album page */
+.shop-page { padding: 1.5rem 1.35rem 1.35rem; display: flex; flex-direction: column; gap: 0.9rem; }
+.shop-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.shop-head h3 { font-size: 1.75rem; }
+.shop-head .hand { font-size: 1.1rem; margin-top: 0.15rem; }
+.sticker.tilt { transform: rotate(-6deg); flex: none; width: 2.5rem; height: 2.5rem; }
+
+.shop-album {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0 0.5rem;
+}
+.shop-album .polaroid { width: 7.25rem; rotate: var(--a, 0deg); }
+.shop-album .polaroid .cap { font-size: 0.85rem; }
+
+.shop-page .eyebrow { font-size: 1rem; }
+.chip-row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.chip {
+  display: inline-block;
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--ink);
+  padding: 0.2rem 0.85rem;
+  background: var(--tape-plain);
+  box-shadow: inset 0 0 0 0.5px rgba(255,255,255,0.25), 0 1px 1px rgba(61,47,33,0.08);
+  rotate: -2deg;
+}
+.chip.tape-pink { background: var(--tape-pink); rotate: 1.5deg; }
+.chip.tape-mint { background: var(--tape-mint); rotate: -1deg; }
+
 .week-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto auto;
   align-items: center;
   gap: 0.25rem 0.75rem;
-  padding: 0.625rem 0.75rem;
-  background: var(--paper-shade);
-  border-radius: var(--radius-card);
-  font-size: 0.9375rem;
+  padding: 0.55rem 0.75rem;
+  border-top: 1px dashed rgba(61, 47, 33, 0.25);
+  font-size: 1rem;
 }
-.week-row .night-caption { margin: 0; }
 .week-row .grow { white-space: nowrap; }
-.week-row .btn { padding: 0.35rem 0.8rem; font-size: 0.8125rem; pointer-events: none; }
+.week-row .hand { font-size: 1rem; }
+.week-row .btn-ghost { padding: 0.3rem 0.75rem; font-size: 0.875rem; pointer-events: none; }
 
-@media (max-width: 860px) { .shops-grid { grid-template-columns: 1fr; } }
+@media (max-width: 860px) { .shops-grid { grid-template-columns: 1fr; } .shops-copy > h2 { transform-origin: left bottom; } }
 @media (max-width: 480px) {
   .week-row { grid-template-columns: minmax(0, 1fr) auto; }
-  .week-row .night-caption { grid-column: 1; }
-  .week-row .btn { grid-column: 2; grid-row: 1 / 3; }
+  .week-row .hand { grid-column: 1; }
+  .week-row .btn-ghost { grid-column: 2; grid-row: 1 / 3; }
+  .shop-album .polaroid { width: 6rem; }
 }
 
-/* --- Sessions (with the neighbourhood underneath) --------------------------------- */
+/* --- Nights (with the neighbourhood underneath) ---------------------------------- */
 
 .pilot { position: relative; }
 .pilot .wrap {
@@ -379,8 +408,8 @@
   align-items: center;
   text-align: center;
 }
+.pilot .section-head h2 { transform-origin: center bottom; }
 
-/* The chart, in the app's paint: kraft ground, ink roads, faded-teal water */
 .pilot-map {
   position: absolute;
   inset: 0;
@@ -391,25 +420,45 @@
 }
 .pilot-map svg { width: 100%; height: 100%; display: block; }
 .map-label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  fill: rgba(42,37,32,0.6);
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 17px;
+  fill: rgba(61, 47, 33, 0.65);
 }
-/* Below this the content column spans the map and the pins would land on
-   the copy, so the chart comes out. */
 @media (max-width: 1000px) { .pilot-map { display: none; } }
 
-/* The week — three night cards, the way the dock lists them */
+/* The week — three night cards, pinned */
 .week {
   width: min(100%, 28rem);
   margin-inline: auto;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
-.week .night-card { padding: 0.875rem 1rem; }
-.week .hint { text-align: center; font-size: 0.8125rem; color: var(--pencil); }
+.night-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.875rem;
+  align-items: start;
+  padding: 1.1rem 1rem 0.9rem;
+  width: 100%;
+}
+.night-card > div { min-width: 0; }
+.night-card .pin { margin-top: -0.35rem; rotate: -6deg; }
+.night-name { font-family: var(--font-display); font-size: 1.35rem; line-height: 1.1; }
+.night-meta { font-family: var(--font-body); font-weight: 700; font-size: 0.9375rem; color: rgba(61,47,33,0.8); margin-top: 0.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.night-caption { font-size: 1rem; margin-top: 0.15rem; }
+.chairs-row { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.4rem; }
+.chairs-row .hand { font-size: 0.95rem; }
+.chairs { display: flex; gap: 3px; }
+.chairs i { width: 8px; height: 8px; border-radius: 2px; border: 1.2px solid rgba(43,53,93,0.5); }
+.chairs i.on { background: var(--pen); border-color: var(--pen); }
+.night-card .btn-ghost { pointer-events: none; }
+.going { display: inline-flex; align-items: center; gap: 0.3rem; rotate: -6deg; }
+.going .star { width: 1.6rem; height: 1.6rem; }
+.going .hand { font-size: 1.1rem; }
+.full { font-size: 1.1rem; color: var(--muted); rotate: -6deg; text-decoration: line-through; text-decoration-thickness: 2px; }
+.week .hint { text-align: center; font-size: 1.05rem; color: var(--muted); }
 
 /* --- Closing CTA ------------------------------------------------------------------ */
 
@@ -420,8 +469,10 @@
   text-align: center;
   gap: 1.25rem;
 }
+.get-app h2 { transform: rotate(-1.5deg); }
 .store-badges { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; }
 .store-badges img { height: 3.375rem; width: auto; display: block; }
+.get-app .hand { font-size: 1.1rem; }
 
 /* --- Footer -------------------------------------------------------------------------- */
 
@@ -429,8 +480,10 @@
 .site-footer .wrap {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
 }
-.site-footer small { color: var(--pencil); font-size: 0.8125rem; }
+.site-footer .wordmark { font-size: 1.5rem; }
+.site-footer .wordmark .sticker { transform: rotate(-6deg); width: 2.25rem; height: 2.25rem; }
+.site-footer small { font-family: var(--font-body); font-weight: 700; font-size: 0.95rem; color: var(--muted); }

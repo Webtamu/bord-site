@@ -26,6 +26,6 @@
 
   // Hex snaps ~0.1s, letters draw staggered to ~1.9s, fills land ~2.1s,
   // beat, then the screen settles away — the app's exit, in web time.
-  setTimeout(function () { intro.classList.add("is-leaving"); }, 2250);
-  setTimeout(done, 2750);
+  setTimeout(function () { intro.classList.add("is-leaving"); }, 1900);
+  setTimeout(done, 2400);
 })();

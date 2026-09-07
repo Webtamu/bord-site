@@ -9,49 +9,74 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- Fallback hands for non-Apple devices; Marker Felt / Noteworthy /
+       Bradley Hand render first where they ship. -->
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Kalam:wght@300;400;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
 
   <!-- ?v= busts browser caches of the stylesheets and scripts. Bump it
        whenever css/ or js/ change, or visitors keep the old rules. -->
-  <link rel="stylesheet" href="css/tokens.css?v=20260907b" />
-  <link rel="stylesheet" href="css/base.css?v=20260907b" />
-  <link rel="stylesheet" href="css/sections.css?v=20260907b" />
-  <link rel="stylesheet" href="css/intro.css?v=20260907b" />
+  <link rel="stylesheet" href="css/tokens.css?v=sb9a" />
+  <link rel="stylesheet" href="css/base.css?v=sb9a" />
+  <link rel="stylesheet" href="css/sections.css?v=sb9a" />
+  <link rel="stylesheet" href="css/intro.css?v=sb9a" />
   <noscript><style>.intro { display: none; }</style></noscript>
 </head>
 <body>
 
-<!-- Launch intro — the b⬡rd moment, ported from the app's LaunchView.
-     Hex tile-snaps in, letters draw themselves, screen settles away. -->
+<!-- Reusable stickers -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- the bord sticker: white die-cut edge, cobalt hex, a face -->
+    <symbol id="bord-sticker" viewBox="0 0 100 100">
+      <polygon points="50,0 93.3,25 93.3,75 50,100 6.7,75 6.7,25" fill="#FCFAF5"/>
+      <polygon points="50,9 85.5,29.5 85.5,70.5 50,91 14.5,70.5 14.5,29.5" fill="#2743D6"/>
+      <rect x="40.5" y="37" width="5.5" height="13" rx="2.75" fill="#fff"/>
+      <rect x="54" y="37" width="5.5" height="13" rx="2.75" fill="#fff"/>
+      <path d="M38 60 Q50 72 62 60" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round"/>
+    </symbol>
+    <!-- gold star sticker -->
+    <symbol id="star" viewBox="0 0 26 26">
+      <path d="M13.0,0.0 L16.2,8.6 L25.4,9.0 L18.2,14.7 L20.6,23.5 L13.0,18.5 L5.4,23.5 L7.8,14.7 L0.6,9.0 L9.8,8.6Z" fill="#FCFAF5"/>
+      <path class="fill" d="M13.0,2.9 L15.5,9.6 L22.6,9.9 L17.1,14.3 L19.0,21.2 L13.0,17.3 L7.0,21.2 L8.9,14.3 L3.4,9.9 L10.5,9.6Z" fill="#EFBF49"/>
+    </symbol>
+    <!-- the drawn face in a photo nobody's taken yet -->
+    <symbol id="face" viewBox="0 0 100 84">
+      <circle cx="44" cy="36" r="2.6" fill="#3D2F21" fill-opacity="0.8"/>
+      <circle cx="56" cy="36" r="2.6" fill="#3D2F21" fill-opacity="0.8"/>
+      <path d="M41 49 Q50 59 59 49" fill="none" stroke="#3D2F21" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+    <!-- a table with four chairs, for the shop's photo -->
+    <symbol id="table" viewBox="0 0 100 84">
+      <rect x="36" y="34" width="28" height="18" rx="3" fill="none" stroke="#3D2F21" stroke-opacity="0.55" stroke-width="1.6"/>
+      <circle cx="42" cy="26" r="3" fill="none" stroke="#3D2F21" stroke-opacity="0.55" stroke-width="1.6"/>
+      <circle cx="58" cy="26" r="3" fill="none" stroke="#3D2F21" stroke-opacity="0.55" stroke-width="1.6"/>
+      <circle cx="42" cy="60" r="3" fill="none" stroke="#3D2F21" stroke-opacity="0.55" stroke-width="1.6"/>
+      <circle cx="58" cy="60" r="3" fill="none" stroke="#3D2F21" stroke-opacity="0.55" stroke-width="1.6"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- Launch intro — the sticker slaps onto the page, the name gets written. -->
 <div class="intro" id="intro" role="presentation" aria-hidden="true">
   <div class="intro-mark">
-    <svg class="intro-letter" viewBox="0 0 44 84" style="--d: 350ms">
-      <text x="22" y="66" text-anchor="middle">b</text>
-    </svg>
-    <span class="intro-hex-wrap">
-      <svg class="intro-hex" viewBox="6.7 0 86.6 100">
-        <path fill="#35558A" d="M43.35 5.84 Q50.00 2.00 56.65 5.84 L84.92 22.16 Q91.57 26.00 91.57 33.68 L91.57 66.32 Q91.57 74.00 84.92 77.84 L56.65 94.16 Q50.00 98.00 43.35 94.16 L15.08 77.84 Q8.43 74.00 8.43 66.32 L8.43 33.68 Q8.43 26.00 15.08 22.16 Z"/>
-      </svg>
-    </span>
-    <svg class="intro-letter is-r" viewBox="0 0 34 84" style="--d: 650ms">
-      <text x="17" y="66" text-anchor="middle">r</text>
-    </svg>
-    <svg class="intro-letter" viewBox="0 0 44 84" style="--d: 900ms">
-      <text x="22" y="66" text-anchor="middle">d</text>
-    </svg>
+    <span class="intro-sticker"><svg><use href="#bord-sticker"/></svg></span>
+    <span class="intro-word">bord</span>
   </div>
 </div>
 
 <header class="site-header">
   <div class="wrap">
-    <a class="wordmark" href="#top" aria-label="bord"><span class="wm-letter">b</span><svg class="wm-hex" viewBox="6.7 0 86.6 100" aria-hidden="true" focusable="false"><path fill="#35558A" d="M43.35 5.84 Q50.00 2.00 56.65 5.84 L84.92 22.16 Q91.57 26.00 91.57 33.68 L91.57 66.32 Q91.57 74.00 84.92 77.84 L56.65 94.16 Q50.00 98.00 43.35 94.16 L15.08 77.84 Q8.43 74.00 8.43 66.32 L8.43 33.68 Q8.43 26.00 15.08 22.16 Z"/></svg><span class="wm-letter">rd</span></a>
+    <a class="wordmark" href="#top" aria-label="bord">
+      <span class="sticker" aria-hidden="true"><svg><use href="#bord-sticker"/></svg></span>
+      <span class="wm-word">bord</span>
+    </a>
     <nav class="site-nav" aria-label="Sections">
-      <a href="#how">How it works</a>
-      <a href="#trust">Trust</a>
-      <a href="#shops">For shops</a>
-      <a href="#nights">Nights</a>
+      <a href="#how">how it works</a>
+      <a href="#trust">trust</a>
+      <a href="#shops">for shops</a>
+      <a href="#nights">nights</a>
     </nav>
-    <a class="btn btn-primary" href="#join"><span class="lbl">Join</span></a>
+    <a class="sticky is-small" href="#join">i'm in!</a>
   </div>
 </header>
 
@@ -61,53 +86,54 @@
   <section class="hero">
     <div class="wrap">
       <div class="hero-copy">
-        <h1 class="display" data-reveal>Meet people over board games at&nbsp;boba&nbsp;shops.</h1>
+        <h1 class="display" data-reveal>meet people over board games at&nbsp;boba&nbsp;shops.</h1>
         <p class="lede" data-reveal>
           bord seats you with three verified strangers at a boba shop nearby.
-          Pick a night, walk over, and play whatever&rsquo;s on the shelf.
+          pick a night, walk over, and play whatever&rsquo;s on the shelf.
         </p>
         <div class="hero-ctas" data-reveal>
-          <a class="btn btn-primary" href="#join"><span class="lbl">Join a night</span></a>
-          <a class="btn btn-text" href="#shops"><span class="lbl">For shops &rarr;</span></a>
+          <a class="sticky" href="#join">join a night</a>
+          <a class="btn-hand" href="#shops">for shops &rarr;</a>
         </div>
-        <p class="live-line" data-reveal>
+        <p class="live-line hand" data-reveal>
           <span class="pulse-dot" aria-hidden="true"></span>
-          FIRST NIGHTS NOW BOOKING &middot; SAN DIEGO
+          first nights now booking &middot; san diego
         </p>
       </div>
 
-      <!-- The spread: a taped print, a night card, a stamp -->
-      <div class="hero-visual" data-reveal aria-label="A page from the bord album">
-        <div class="hero-print">
-          <div class="print taped">
-            <span class="well" aria-hidden="true">
-              <svg viewBox="0 0 100 92" fill="none" stroke="#2A2520" stroke-opacity="0.45" stroke-width="1.2">
-                <rect x="36" y="38" width="28" height="18" rx="3"/>
-                <circle cx="42" cy="30" r="3"/><circle cx="58" cy="30" r="3"/>
-                <circle cx="42" cy="64" r="3"/><circle cx="58" cy="64" r="3"/>
-              </svg>
-            </span>
-          </div>
-          <p class="hand print-caption">maya took the longest road</p>
-          <span class="stamp" aria-hidden="true">Going</span>
+      <!-- Tonight's page: the date, the crew taped down, the plan -->
+      <div class="hero-page" aria-label="Tonight's page from the album">
+        <div class="page-date" data-reveal>
+          <span class="display">aug 29</span>
+          <span class="hand">&middot; friday night</span>
         </div>
 
-        <div class="paper night-card hero-card lean-r" aria-label="Jade Rabbit Tea, tonight 8:30, 3 of 4 seated">
-          <span class="die d2" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-          <div>
-            <div class="night-name">Jade Rabbit Tea</div>
-            <div class="night-meta">Tonight 8:30 PM &middot; 23 min drive</div>
-            <div class="night-caption">Shelf &middot; Catan &middot; Jenga +1</div>
-            <div class="seats-row">
-              <span class="seats" aria-hidden="true">
-                <span class="seat is-taken"></span><span class="seat is-taken"></span>
-                <span class="table"></span>
-                <span class="seat is-taken"></span><span class="seat"></span>
-              </span>
-              <span class="night-caption">3 of 4 seated</span>
-            </div>
-          </div>
-          <span class="btn btn-ghost"><span class="lbl">Join</span></span>
+        <div class="crew">
+          <span class="polaroid taped" style="--tint: var(--photo-blue); --a: -5deg" data-slap>
+            <span class="photo"><svg><use href="#face"/></svg></span>
+            <span class="cap">you &middot; jasmine</span>
+          </span>
+          <span class="polaroid taped tape-mint" style="--tint: var(--photo-pink); --a: 4deg" data-slap>
+            <span class="photo"><svg><use href="#face"/></svg></span>
+            <span class="cap">maya &middot; taro</span>
+          </span>
+          <span class="polaroid taped tape-pink" style="--tint: var(--photo-peach); --a: -3deg" data-slap>
+            <span class="photo"><svg><use href="#face"/></svg></span>
+            <span class="cap">dan &middot; thai tea</span>
+          </span>
+          <span class="polaroid is-empty taped" style="--a: 6deg" data-slap>
+            <span class="photo"><span class="q">?<small>this could be you</small></span></span>
+            <span class="cap">the fourth chair</span>
+          </span>
+        </div>
+
+        <div class="paper plan taped tape-mint tape-corner lean-r" data-reveal>
+          <p class="display plan-title">the plan <span class="star" aria-hidden="true"><svg><use href="#star"/></svg></span></p>
+          <ul class="hand ruled">
+            <li>jade rabbit tea, 4646 convoy st</li>
+            <li>8:30 tonight &mdash; leave by 8:20!</li>
+            <li>catan&rsquo;s on the shelf</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -117,45 +143,52 @@
   <section id="how">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow" data-reveal>How it works</p>
-        <h2 class="display" data-reveal><span class="underlined">Pick a night.</span> Get dealt in. Stamp it.</h2>
+        <p class="eyebrow" data-reveal>how it works</p>
+        <h2 class="display" data-reveal><span class="underlined">pick a night.</span> get taped in. keep the page.</h2>
       </div>
       <div class="steps">
-        <div class="paper step lean-l" data-reveal>
+        <div class="paper step taped tape-pink lean-l" data-reveal>
           <div class="step-figure" aria-hidden="true">
-            <span class="die d3" style="transform: rotate(-12deg)"><i></i><i></i><i></i><i></i><i></i></span>
+            <span class="pin"></span>
+            <span class="pin is-red"></span>
+            <span class="pin is-green"></span>
           </div>
-          <p class="eyebrow">Pick a night</p>
-          <h3 class="display">A shop, a night, a seat</h3>
-          <p>The map shows every boba shop running a night this week &mdash;
-             the die on each pin is how many. Tap one, take a seat. Bring a
-             friend; duos are never split.</p>
+          <p class="eyebrow">pick a night</p>
+          <h3 class="display">a shop, a night, a chair</h3>
+          <p>the map is pinned with every boba shop running a night this
+             week. tap a pin, take a chair. bring a friend &mdash; duos are
+             never split.</p>
         </div>
-        <div class="paper step" data-reveal>
+        <div class="paper step taped tape-mint" data-reveal>
           <div class="step-figure" aria-hidden="true">
-            <span class="dealt">
-              <span class="tile">PN</span>
-              <span class="tabletop"></span>
-              <span class="tile you">HZ</span>
+            <span class="mini-crew">
+              <i style="--tint: var(--photo-blue); --a: -6deg"></i>
+              <i style="--tint: var(--photo-pink); --a: 3deg"></i>
+              <i style="--tint: var(--photo-sage); --a: -2deg"></i>
+              <i class="you" style="--tint: var(--photo-peach); --a: 5deg"></i>
             </span>
           </div>
-          <p class="eyebrow">Get dealt in</p>
-          <h3 class="display">Your table fills up</h3>
-          <p>Three other verified players get dealt into the chairs around
-             yours. You see who&rsquo;s coming; they see you. Nobody walks in
+          <p class="eyebrow">get taped in</p>
+          <h3 class="display">your page fills up</h3>
+          <p>three other verified players land on tonight&rsquo;s page beside
+             you. you see who&rsquo;s coming; they see you. nobody walks in
              cold.</p>
         </div>
-        <div class="paper step lean-r" data-reveal>
+        <div class="paper step taped lean-r" data-reveal>
           <div class="step-figure" aria-hidden="true">
-            <span class="mini-stamps">
-              <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i>
+            <span class="star-row">
+              <span class="star"><svg><use href="#star"/></svg></span>
+              <span class="star"><svg><use href="#star"/></svg></span>
+              <span class="star"><svg><use href="#star"/></svg></span>
+              <span class="star is-empty"><svg><use href="#star"/></svg></span>
+              <span class="star is-empty"><svg><use href="#star"/></svg></span>
             </span>
           </div>
-          <p class="eyebrow">Stamp it</p>
-          <h3 class="display">Show up, get the stamp</h3>
-          <p>Check in at the table and the night goes on your card. Take the
-             one photo; it lands in your album, and on the shop&rsquo;s page
-             if you say so.</p>
+          <p class="eyebrow">keep the page</p>
+          <h3 class="display">show up, get the star</h3>
+          <p>check in at the table and the night goes in your album with a
+             gold star on it. take the one photo; it lands on the page, and
+             on the shop&rsquo;s if you say so.</p>
         </div>
       </div>
     </div>
@@ -165,30 +198,38 @@
   <section id="trust">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow" data-reveal>Trust</p>
-        <h2 class="display" data-reveal>Real people, real tables.</h2>
-        <p class="lede" data-reveal>Showing up is the whole game. Everything here is built to make it the norm.</p>
+        <p class="eyebrow" data-reveal>trust</p>
+        <h2 class="display" data-reveal>real people, real tables.</h2>
+        <p class="lede" data-reveal>showing up is the whole game. the album is built to make it the norm.</p>
       </div>
       <div class="trust-grid">
-        <div class="paper index-card lean-l" data-reveal>
-          <p class="title">Verified</p>
-          <p>Everyone is 18+, phone-verified, and ID-checked. Nights happen in
+        <div class="paper index-card taped lean-l" data-reveal>
+          <p class="title display">verified</p>
+          <p>everyone is 18+, phone-verified, and ID-checked. nights happen in
              public, at staffed shops, at a table with your name on it.</p>
         </div>
-        <div class="paper index-card taped" data-reveal>
-          <p class="title">Karma</p>
-          <p>Show up and your standing climbs. It&rsquo;s a word the table sees,
-             never a number.</p>
-          <div class="tier-row" aria-label="Karma tiers">
-            <span class="stamp is-pencil">New</span>
-            <span class="tier-arrow" aria-hidden="true">&rarr;</span>
-            <span class="stamp is-pencil">Reliable</span>
-            <span class="tier-arrow" aria-hidden="true">&rarr;</span>
-            <span class="stamp">Trusted</span>
+        <div class="paper index-card taped tape-pink" data-reveal>
+          <p class="title display">the album is the karma</p>
+          <p class="trust-line hand">
+            trusted:
+            <span class="star"><svg><use href="#star"/></svg></span>
+            <span class="star"><svg><use href="#star"/></svg></span>
+            <span class="star"><svg><use href="#star"/></svg></span>
+            <span class="dim">&middot; 12 nights kept, 0 missed</span>
+          </p>
+          <div class="album-mini" aria-hidden="true">
+            <i style="--tint: var(--photo-pink); --a: -4deg"></i>
+            <i style="--tint: var(--photo-sage); --a: 3deg"></i>
+            <i style="--tint: var(--photo-blue); --a: -2deg"></i>
+            <i class="gap"></i>
+            <i style="--tint: var(--photo-peach); --a: 5deg"></i>
+            <i style="--tint: var(--photo-sage); --a: -3deg"></i>
           </div>
+          <p>every night you keep gets a photo. flake, and the page stays
+             empty &mdash; everyone sees the gap.</p>
         </div>
-        <div class="paper index-card lean-r" data-reveal>
-          <p class="title">Friends</p>
+        <div class="sticky-note lean-r" data-reveal>
+          <p class="display sticky-title">friends</p>
           <p class="hand">bring someone &mdash; duos are seated together, always.
              or send the link and let a friend take the open chair.</p>
         </div>
@@ -200,56 +241,66 @@
   <section id="shops">
     <div class="wrap shops-grid">
       <div class="shops-copy">
-        <p class="eyebrow" data-reveal>For shops</p>
-        <h2 class="display" data-reveal>Your slow nights, full.</h2>
-        <p data-reveal>You keep the games you already have. We bring the people.</p>
+        <p class="eyebrow" data-reveal>for shops</p>
+        <h2 class="display" data-reveal>your slow nights, full.</h2>
+        <p data-reveal>you keep the games you already have. we bring the people.</p>
         <ul class="shops-points">
-          <li data-reveal><span class="point-mark" aria-hidden="true"></span>
-            <span><strong>Your shelf, your rules.</strong> Whatever&rsquo;s on
-            the shelf is what gets played. Nothing to buy, nothing to
+          <li data-reveal><span class="check" aria-hidden="true"></span>
+            <span><strong>your shelf, your rules.</strong> whatever&rsquo;s on
+            the shelf is what gets played. nothing to buy, nothing to
             manage.</span></li>
-          <li data-reveal><span class="point-mark" aria-hidden="true"></span>
-            <span><strong>People through the door.</strong> Every seat we fill
+          <li data-reveal><span class="check" aria-hidden="true"></span>
+            <span><strong>people through the door.</strong> every chair we fill
             is a customer at your counter, on a night that was quiet.</span></li>
-          <li data-reveal><span class="point-mark" aria-hidden="true"></span>
-            <span><strong>You set the nights.</strong> A standing week &mdash;
-            the tables and evenings bord can fill. Staff take zero
+          <li data-reveal><span class="check" aria-hidden="true"></span>
+            <span><strong>you set the nights.</strong> a standing week &mdash;
+            the tables and evenings bord can fill. staff take zero
             taps.</span></li>
-          <li data-reveal><span class="point-mark" aria-hidden="true"></span>
-            <span><strong>Your shop&rsquo;s page.</strong> Every night people
-            share lands on it: the photos, the nights, the regulars.</span></li>
+          <li data-reveal><span class="check" aria-hidden="true"></span>
+            <span><strong>your shop&rsquo;s page.</strong> every night people
+            share lands in your album: the photos, the nights, the regulars.</span></li>
         </ul>
-        <a class="btn btn-primary" href="mailto:shops@bordgame.app" data-reveal><span class="lbl">Get your shop on bord</span></a>
+        <a class="sticky" href="mailto:shops@bordgame.app" data-reveal>get your shop on bord</a>
       </div>
 
-      <!-- The shop's page, as the app draws it -->
-      <div class="paper shop-page lean-r" data-reveal aria-label="Preview of a shop's page">
-        <div class="print taped">
-          <span class="well" aria-hidden="true">
-            <svg viewBox="0 0 100 92" fill="none" stroke="#2A2520" stroke-opacity="0.45" stroke-width="1.2">
-              <rect x="36" y="38" width="28" height="18" rx="3"/>
-              <circle cx="42" cy="30" r="3"/><circle cx="58" cy="30" r="3"/>
-              <circle cx="42" cy="64" r="3"/><circle cx="58" cy="64" r="3"/>
-            </svg>
+      <!-- The shop's page in the album -->
+      <div class="paper shop-page taped tape-mint lean-r" data-reveal aria-label="Preview of a shop's album page">
+        <div class="shop-head">
+          <div>
+            <h3 class="display">jade rabbit tea</h3>
+            <p class="hand">boba and oolong, closes at 11. catan lives behind the counter.</p>
+          </div>
+          <span class="sticker tilt" aria-hidden="true"><svg><use href="#bord-sticker"/></svg></span>
+        </div>
+        <div class="shop-album">
+          <span class="polaroid taped" style="--tint: var(--photo-sage); --a: -4deg">
+            <span class="photo"><svg><use href="#table"/></svg></span>
+            <span class="cap">aug 22 &middot; won!</span>
+          </span>
+          <span class="polaroid taped tape-pink" style="--tint: var(--photo-blue); --a: 3deg">
+            <span class="photo"><svg><use href="#face"/></svg></span>
+            <span class="cap">aug 15</span>
+          </span>
+          <span class="polaroid taped tape-mint" style="--tint: var(--photo-peach); --a: -2deg">
+            <span class="photo"><svg><use href="#face"/></svg></span>
+            <span class="cap">aug 9</span>
           </span>
         </div>
-        <h3 class="display">Jade Rabbit Tea</h3>
-        <p class="hand">boba and oolong, closes at 11. catan lives behind the counter.</p>
-        <p class="eyebrow">On the shelf</p>
+        <p class="eyebrow">on the shelf</p>
         <div class="chip-row">
-          <span class="chip"><span class="lbl">Catan</span></span>
-          <span class="chip"><span class="lbl">Jenga</span></span>
-          <span class="chip"><span class="lbl">Uno</span></span>
+          <span class="chip tape-pink">catan</span>
+          <span class="chip tape-mint">jenga</span>
+          <span class="chip">uno</span>
         </div>
         <div class="week-row">
-          <span class="grow">Tonight 8:30 PM</span>
-          <span class="night-caption">3 of 4 seated</span>
-          <span class="btn btn-ghost"><span class="lbl">Join</span></span>
+          <span class="grow note">tonight 8:30 pm</span>
+          <span class="hand dim">3 of 4 chairs</span>
+          <span class="btn-ghost">join</span>
         </div>
         <div class="week-row">
-          <span class="grow">Thu 7:00 PM</span>
-          <span class="night-caption">2 of 4 seated</span>
-          <span class="btn btn-ghost"><span class="lbl">Join</span></span>
+          <span class="grow note">thu 7:00 pm</span>
+          <span class="hand dim">2 of 4 chairs</span>
+          <span class="btn-ghost">join</span>
         </div>
       </div>
     </div>
@@ -257,12 +308,13 @@
 
   <!-- Nights ................................................................ -->
   <section id="nights" class="pilot">
-    <!-- Decorative neighbourhood, in the app's map paint. Fictional shops. -->
+    <!-- The neighbourhood, in the scrapbook skin's map paint: kraft ground,
+         ballpoint water, ink roads, pushpins. Fictional shops. -->
     <div class="pilot-map" aria-hidden="true">
       <svg viewBox="0 0 2000 1200" preserveAspectRatio="xMidYMid slice" focusable="false">
         <path d="M1932 -20 C1896 240, 1976 500, 1908 760 S1920 1060, 1914 1240"
-              fill="none" stroke="#8C9E9E" stroke-opacity="0.45" stroke-width="26" stroke-linecap="round"/>
-        <g stroke="#2A2520" stroke-opacity="0.10" stroke-width="1.4">
+              fill="none" stroke="#2B355D" stroke-opacity="0.35" stroke-width="28" stroke-linecap="round"/>
+        <g stroke="#3D2F21" stroke-opacity="0.11" stroke-width="1.4">
           <path d="M80 0V1200"/><path d="M190 0V1200"/><path d="M330 0V1200"/>
           <path d="M420 0V1200"/><path d="M545 0V1200"/><path d="M660 0V1200"/>
           <path d="M790 0V1200"/><path d="M900 0V1200"/><path d="M1010 0V1200"/>
@@ -274,95 +326,87 @@
           <path d="M0 650H2000"/><path d="M0 740H2000"/><path d="M0 850H2000"/>
           <path d="M0 940H2000"/><path d="M0 1030H2000"/><path d="M0 1130H2000"/>
         </g>
-        <g stroke="#2A2520" stroke-opacity="0.18" stroke-width="2.2" stroke-linecap="round">
+        <g stroke="#3D2F21" stroke-opacity="0.2" stroke-width="2.4" stroke-linecap="round">
           <path d="M-20 820 L1320 -20"/>
           <path d="M680 1220 L2020 540"/>
         </g>
-        <rect x="290" y="240" width="190" height="130" rx="10"
-              fill="#8C9466" fill-opacity="0.22" stroke="#2A2520" stroke-opacity="0.12"/>
-        <!-- dice on pins, kept to the margins so they never land on the copy -->
-        <g transform="translate(1466 386) rotate(-9)">
-          <rect x="0" y="0" width="30" height="30" rx="7" fill="#FDFCF9" stroke="#2A2520" stroke-width="1.3"/>
-          <circle cx="10" cy="10" r="2.5" fill="#2A2520"/><circle cx="20" cy="20" r="2.5" fill="#2A2520"/>
+        <rect x="290" y="240" width="190" height="130" rx="6"
+              fill="#5C8F66" fill-opacity="0.28" stroke="#3D2F21" stroke-opacity="0.12"/>
+        <!-- pushpins in the margins, clear of the copy -->
+        <g transform="translate(1470 372)">
+          <rect x="11" y="18" width="2" height="20" fill="#3D2F21" fill-opacity="0.8"/>
+          <circle cx="12" cy="12" r="12" fill="#2B355D"/><circle cx="8" cy="8" r="4" fill="#fff" fill-opacity="0.35"/>
         </g>
-        <circle cx="1481" cy="384" r="4.5" fill="#2A2520"/>
-        <text class="map-label" x="1456" y="436" text-anchor="end">JADE RABBIT TEA</text>
-        <g transform="translate(506 766) rotate(-9)">
-          <rect x="0" y="0" width="30" height="30" rx="7" fill="#FDFCF9" stroke="#2A2520" stroke-width="1.3"/>
-          <circle cx="15" cy="15" r="2.5" fill="#2A2520"/>
+        <text class="map-label" x="1452" y="436" text-anchor="end">jade rabbit tea</text>
+        <g transform="translate(510 752)">
+          <rect x="11" y="18" width="2" height="20" fill="#3D2F21" fill-opacity="0.8"/>
+          <circle cx="12" cy="12" r="12" fill="#D9403A"/><circle cx="8" cy="8" r="4" fill="#fff" fill-opacity="0.35"/>
         </g>
-        <circle cx="521" cy="764" r="4.5" fill="#2A2520"/>
-        <text class="map-label" x="546" y="806">CLOUD &amp; PEARL</text>
-        <g transform="translate(1396 906) rotate(-9)">
-          <rect x="0" y="0" width="30" height="30" rx="7" fill="#FDFCF9" stroke="#2A2520" stroke-width="1.3"/>
-          <circle cx="10" cy="10" r="2.5" fill="#2A2520"/><circle cx="15" cy="15" r="2.5" fill="#2A2520"/><circle cx="20" cy="20" r="2.5" fill="#2A2520"/>
+        <text class="map-label" x="546" y="806">cloud &amp; pearl</text>
+        <g transform="translate(1400 892)">
+          <rect x="11" y="18" width="2" height="20" fill="#3D2F21" fill-opacity="0.8"/>
+          <circle cx="12" cy="12" r="12" fill="#5C8F66"/><circle cx="8" cy="8" r="4" fill="#fff" fill-opacity="0.35"/>
         </g>
-        <circle cx="1411" cy="904" r="4.5" fill="#2A2520"/>
-        <text class="map-label" x="1386" y="956" text-anchor="end">LUNA BOBA</text>
-        <!-- you: a meeple -->
-        <path transform="translate(596 430) scale(1.1)" fill="#35558A"
-              d="M7 0a4 4 0 0 1 4 4c0 1.6-.8 2.8-1.6 3.5 2.6.8 5.6 3 5.6 6.5l-3.5 1.2 1.5 9H1l1.5-9L-1 14c0-3.5 3-5.7 5.6-6.5C3.8 6.8 3 5.6 3 4a4 4 0 0 1 4-4z"/>
+        <text class="map-label" x="1386" y="956" text-anchor="end">luna boba</text>
+        <!-- you: the sticker -->
+        <use href="#bord-sticker" x="586" y="420" width="44" height="44" transform="rotate(8 608 442)"/>
       </svg>
     </div>
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow" data-reveal>Nights</p>
-        <h2 class="display" data-reveal>The week, near you.</h2>
-        <p class="lede" data-reveal>We&rsquo;re starting with scheduled nights in San Diego.
-           As more players join, the live queue opens up.</p>
+        <p class="eyebrow" data-reveal>nights</p>
+        <h2 class="display" data-reveal>the week, near you.</h2>
+        <p class="lede" data-reveal>we&rsquo;re starting with scheduled nights in san diego.
+           as more players join, the live queue opens up.</p>
       </div>
 
       <div class="week" data-reveal aria-label="Preview of the week's nights">
-        <div class="paper night-card taped lean-l">
-          <span class="die d2" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        <div class="paper night-card taped tape-pink lean-l">
+          <span class="pin" aria-hidden="true"></span>
           <div>
-            <div class="night-name">GameHaus</div>
-            <div class="night-meta">Tonight 7:00 PM &middot; 1 min drive</div>
-            <div class="night-caption">Shelf &middot; Catan &middot; Wingspan +2</div>
-            <div class="seats-row">
-              <span class="seats long" aria-hidden="true">
-                <span class="seat is-taken"></span><span class="seat is-taken"></span><span class="seat is-taken"></span><span class="seat is-taken"></span><span class="seat is-taken"></span><span class="seat is-taken"></span><span class="seat is-taken"></span><span class="seat is-taken"></span><span class="seat is-taken"></span><span class="seat"></span><span class="seat"></span><span class="seat"></span>
+            <div class="night-name">gamehaus</div>
+            <div class="night-meta">tonight 7:00 pm &middot; 1 min drive</div>
+            <div class="night-caption hand">shelf: catan, wingspan +2</div>
+            <div class="chairs-row">
+              <span class="chairs" aria-hidden="true">
+                <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i>
               </span>
-              <span class="night-caption">9 of 12 seated &middot; long table</span>
+              <span class="hand dim">9 of 12 chairs &middot; long table</span>
             </div>
           </div>
-          <span class="btn btn-ghost"><span class="lbl">Join</span></span>
+          <span class="btn-ghost">join</span>
         </div>
-        <div class="paper night-card taped tape-r lean-r">
-          <span class="die d2" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        <div class="paper night-card taped tape-mint lean-r">
+          <span class="pin is-red" aria-hidden="true"></span>
           <div>
-            <div class="night-name">Jade Rabbit Tea</div>
-            <div class="night-meta">Thu 7:00 PM &middot; 23 min drive</div>
-            <div class="night-caption">Shelf &middot; Catan &middot; Jenga +1</div>
-            <div class="seats-row">
-              <span class="seats" aria-hidden="true">
-                <span class="seat is-taken"></span><span class="seat is-taken"></span>
-                <span class="table"></span>
-                <span class="seat"></span><span class="seat"></span>
+            <div class="night-name">jade rabbit tea</div>
+            <div class="night-meta">thu 7:00 pm &middot; 23 min drive</div>
+            <div class="night-caption hand">shelf: catan, jenga +1</div>
+            <div class="chairs-row">
+              <span class="chairs" aria-hidden="true">
+                <i class="on"></i><i class="on"></i><i></i><i></i>
               </span>
-              <span class="night-caption">2 of 4 seated</span>
+              <span class="hand dim">2 of 4 chairs</span>
             </div>
           </div>
-          <span class="stamp" aria-label="You're going">Going</span>
+          <span class="going" aria-label="You're going"><span class="star"><svg><use href="#star"/></svg></span><span class="hand">going!</span></span>
         </div>
         <div class="paper night-card taped lean-l">
-          <span class="die d1" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+          <span class="pin is-green" aria-hidden="true"></span>
           <div>
-            <div class="night-name">Cloudleaf Tea House</div>
-            <div class="night-meta">Fri 7:30 PM &middot; 25 min drive</div>
-            <div class="night-caption">Shelf &middot; Ticket to Ride &middot; Sushi Go +1</div>
-            <div class="seats-row">
-              <span class="seats" aria-hidden="true">
-                <span class="seat is-taken"></span><span class="seat is-taken"></span>
-                <span class="table"></span>
-                <span class="seat is-taken"></span><span class="seat is-taken"></span>
+            <div class="night-name">cloudleaf tea house</div>
+            <div class="night-meta">fri 7:30 pm &middot; 25 min drive</div>
+            <div class="night-caption hand">shelf: ticket to ride, sushi go +1</div>
+            <div class="chairs-row">
+              <span class="chairs" aria-hidden="true">
+                <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
               </span>
-              <span class="night-caption">4 of 4 seated</span>
+              <span class="hand dim">4 of 4 chairs</span>
             </div>
           </div>
-          <span class="stamp is-pencil" aria-label="Full">Full</span>
+          <span class="full hand" aria-label="Full">full</span>
         </div>
-        <p class="hint">Pick a night and tap Join &mdash; that&rsquo;s it.</p>
+        <p class="hint hand">pick a night and tap join &mdash; that&rsquo;s it.</p>
       </div>
     </div>
   </section>
@@ -370,8 +414,8 @@
   <!-- Closing CTA ................................................................ -->
   <section id="join">
     <div class="wrap get-app">
-      <p class="eyebrow" data-reveal>Get the app</p>
-      <h2 class="display" data-reveal>Ready to play?</h2>
+      <p class="eyebrow" data-reveal>get the app</p>
+      <h2 class="display" data-reveal>ready to play?</h2>
       <div class="store-badges" data-reveal>
         <!-- Swap # for the real store URLs at launch -->
         <a href="#" aria-label="Download on the App Store">
@@ -381,6 +425,7 @@
           <img src="img/google-play-badge.svg" alt="Get it on Google Play" />
         </a>
       </div>
+      <p class="hand dim" data-reveal>every night you keep gets a photo.</p>
     </div>
   </section>
 
@@ -388,13 +433,16 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <span class="wordmark" aria-label="bord">b<svg class="wm-hex" viewBox="6.7 0 86.6 100" aria-hidden="true" focusable="false"><path fill="#35558A" d="M43.35 5.84 Q50.00 2.00 56.65 5.84 L84.92 22.16 Q91.57 26.00 91.57 33.68 L91.57 66.32 Q91.57 74.00 84.92 77.84 L56.65 94.16 Q50.00 98.00 43.35 94.16 L15.08 77.84 Q8.43 74.00 8.43 66.32 L8.43 33.68 Q8.43 26.00 15.08 22.16 Z"/></svg>rd</span>
+    <span class="wordmark" aria-label="bord">
+      <span class="sticker" aria-hidden="true"><svg><use href="#bord-sticker"/></svg></span>
+      <span class="wm-word">bord</span>
+    </span>
     <small>&copy; 2026 bord.</small>
   </div>
 </footer>
 
-<script src="js/intro.js?v=20260907b"></script>
-<script src="js/reveal.js?v=20260907b"></script>
-<script src="js/header.js?v=20260907b"></script>
+<script src="js/intro.js?v=sb9a"></script>
+<script src="js/reveal.js?v=sb9a"></script>
+<script src="js/header.js?v=sb9a"></script>
 </body>
 </html>
