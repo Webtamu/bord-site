@@ -1,5 +1,5 @@
 /* BORD site — launch intro. Ports the app's LaunchView choreography:
-   the ink-blue hex tile-snaps in first (scale 1.06, rotate −2° → settle),
+   the accent hex tile-snaps in first (scale 1.06, rotate −2° → settle),
    then b · r · d draw themselves in, stroke first, ink fill after —
    the Hinge logo-draw move in BORD's own hand. Plays once per session;
    skipped entirely under prefers-reduced-motion (see js/intro.js). */
@@ -11,7 +11,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--kraft) url("../img/fiber.svg") repeat;
+  background: var(--cover) url("../img/fiber.svg") repeat;
+  flex-direction: column;
+  gap: 1.25rem;
   background-size: 360px 360px;
   transition: opacity 450ms ease, transform 450ms ease;
 }
@@ -35,8 +37,8 @@
 /* Letters: hidden until the sequence starts, then stroke-drawn and filled.
    Per-letter stagger set inline via --d (B → R → D). */
 
-.intro-letter { width: 44px; height: 84px; overflow: visible; }
-.intro-letter.is-r { width: 34px; }
+.intro-letter { width: 38px; height: 84px; overflow: visible; }
+.intro-letter.is-r { width: 27px; }
 
 /* The dash budget (1600) must exceed the glyph outline length in EVERY
    font that could render these letters — if the outline is longer than
@@ -46,9 +48,9 @@
 .intro-letter text {
   font-family: var(--font-display);
   font-size: 72px;
-  font-weight: 500;
+  font-weight: 400;
   fill: transparent;
-  stroke: #2A2520;   /* literal ink — the overlay never depends on vars */
+  stroke: #3D2F21;   /* literal ink — the overlay never depends on vars */
   stroke-width: 1.4;
   stroke-dasharray: 1600;
   stroke-dashoffset: 1600;
@@ -71,7 +73,7 @@
 }
 
 @keyframes intro-fill {
-  to { fill: #2A2520; stroke-opacity: 0; }
+  to { fill: #3D2F21; stroke-opacity: 0; }
 }
 
 /* The hex: the game piece lands first, like a placed tile. Sized to the o
@@ -93,13 +95,23 @@
 
 /* Same hardening as .wm-hex path (see base.css): direct rule, literal
    cobalt, so no host stylesheet can turn the tile black. */
-.intro-hex path { fill: #35558A !important; }
+.intro-hex path { fill: #7C5CC4 !important; }
 
 .intro.is-playing .intro-hex-wrap {
-  animation: intro-tile-snap 550ms cubic-bezier(0.33, 1.12, 0.5, 1) 80ms both;
+  animation: intro-tile-snap 550ms cubic-bezier(0.22, 0.61, 0.36, 1) 80ms both;   /* settle: no overshoot */
 }
 
 @keyframes intro-tile-snap {
   from { opacity: 0; transform: scale(1.06) rotate(-2deg); }
   to   { opacity: 1; transform: none; }
 }
+
+/* The quip under the mark — one line, the app's launch line, arrives
+   after the letters have filled. */
+.intro-quip {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+  opacity: 0;
+}
+.intro.is-playing .intro-quip { animation: intro-appear 400ms ease-out 1500ms forwards; }
