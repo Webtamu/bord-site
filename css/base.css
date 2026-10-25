@@ -322,15 +322,15 @@ section { padding-block: var(--section-pad); }
 .stk.tr { top: calc(var(--s, 46px) * -0.64 + 6px); right: calc(var(--s, 46px) * -0.64 + 4px); }
 
 /* The mascot's face: the exported asset, never redrawn, on its cut */
-.bord {
+.bord-sticker {
   position: relative;
   display: inline-block;
   width: var(--s, 60px);
   aspect-ratio: 308.305 / 356;
   flex: none;
 }
-.bord img { width: 100%; height: 100%; }
-.bord.is-cut::before {
+.bord-sticker img { width: 100%; height: 100%; }
+.bord-sticker.is-cut::before {
   content: "";
   position: absolute;
   inset: -12% -11%;
@@ -338,7 +338,7 @@ section { padding-block: var(--section-pad); }
   filter: drop-shadow(0 1.5px 2px rgba(61,47,33,0.15));
   z-index: 0;
 }
-.bord img { position: relative; z-index: 1; }
+.bord-sticker img { position: relative; z-index: 1; }
 
 /* --- Pushpin through a card's top edge --------------------------------- */
 .pin {

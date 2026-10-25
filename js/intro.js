@@ -1,7 +1,11 @@
 // Launch intro sequencing. The choreography lives in css/intro.css;
-// this only starts it, ends it, and knows when not to play at all:
-// once per session, and never under prefers-reduced-motion.
+// this only starts it, ends it, and knows when not to play at all.
 // Must load before reveal.js (which waits on "bord:intro-done").
+//
+// The app's LaunchView, mascot path: the tile lands, Bord takes the o and
+// rolls his dice flip, the letters draw in around him, and the screen
+// settles away. It plays on EVERY load (founder call 2026-10-25: "for sure
+// does the dice flip every single time"), never under reduced motion.
 
 (function () {
   var intro = document.getElementById("intro");
@@ -14,18 +18,22 @@
 
   if (!intro) { window.__bordIntroDone = true; return; }
 
-  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var force = /[?&]intro\b/.test(location.search);   // ?intro replays it
-  var seen = false;
-  try { seen = sessionStorage.getItem("bord-intro") === "1"; } catch (e) {}
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { done(); return; }
 
-  if (reduced || (seen && !force)) { done(); return; }
-  try { sessionStorage.setItem("bord-intro", "1"); } catch (e) {}
-
+  var bord = document.getElementById("intro-bord");
+  if (bord) intro.classList.add("has-bord");
   intro.classList.add("is-playing");
 
-  // Hex snaps ~0.1s, letters draw staggered to ~1.9s, fills land ~2.1s,
-  // beat, then the screen settles away — the app's exit, in web time.
-  setTimeout(function () { intro.classList.add("is-leaving"); }, 2500);
-  setTimeout(done, 3000);
+  // App timing: the tile snaps in (80ms delay + 550ms settle), and Bord
+  // crouches 0.35s after it starts, so the two moments read separately.
+  // Adding .bord--rolling plays his baked roll once from its first frame.
+  if (bord) setTimeout(function () { bord.classList.add("bord--rolling"); }, 430);
+
+  // His roll is 1.7s: crouch, hop, tumble, plant, burst back to the flat
+  // mark at ~2.1s. The letters finish filling at ~2.1s too. A beat, then the
+  // screen settles away, the app's exit in web time.
+  // ?intro=hold keeps the intro on screen (for checking the choreography).
+  if (/[?&]intro=hold\b/.test(location.search)) return;
+  setTimeout(function () { intro.classList.add("is-leaving"); }, 2550);
+  setTimeout(done, 3050);
 })();

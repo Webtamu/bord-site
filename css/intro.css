@@ -115,3 +115,25 @@
   opacity: 0;
 }
 .intro.is-playing .intro-quip { animation: intro-appear 400ms ease-out 1500ms forwards; }
+
+/* --- Bord in the o (2026-10-25) -----------------------------------------
+   The app's LaunchView, mascot path: Bord sits in the tile's exact slot and
+   rolls his dice flip once, on every load. His model: viewBox 580 × 600,
+   resting hex centred at (290, 350), 356 units tall. Scaled so that hex is
+   the tile's 36.6px of ink (s = 36.6 / 356), then centred on the tile's
+   33.5 × 38.6 frame. The canvas is larger than the slot on purpose: the hop,
+   tumble and ink burst use the headroom. */
+.intro-hex-wrap { position: relative; }
+.intro-bord {
+  --bord-body: #7C5CC4;   /* the accent, same as the tile */
+  --bord-ink: #3D2F21;    /* walnut ink, never black */
+  position: absolute;
+  width: 59.63px;          /* 580 × s */
+  height: 61.69px;         /* 600 × s */
+  left: -13.06px;          /* 16.75 − 290 × s */
+  top: -16.68px;           /* 19.3 − 350 × s */
+  max-width: none;         /* base.css caps svg at its 33.5px box */
+  pointer-events: none;
+}
+/* the tile holds the footprint; Bord is what you see */
+.intro.has-bord .intro-hex { visibility: hidden; }
