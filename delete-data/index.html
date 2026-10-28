@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delete your bord data</title>
+  <meta name="description" content="How to delete some or all of your bord data without deleting your account." />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg?v=20260914" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/tokens.css?v=20260913" />
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body { background: var(--cover); color: var(--ink); font: 16px/1.65 Inter, -apple-system, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-underline-offset: 2px; }
+    .top { max-width: 640px; margin: 0 auto; padding: 28px 24px 0; }
+    .top a { color: var(--ink); text-decoration: none; font: 600 22px/1 "Source Serif 4", Georgia, serif; }
+    .page { max-width: 640px; margin: 20px auto 64px; padding: 44px 48px 48px; background: var(--paper); border-radius: 6px; box-shadow: 0 10px 30px var(--lift); }
+    h1 { font: 600 36px/1.1 "Source Serif 4", Georgia, serif; letter-spacing: -0.015em; margin: 0 0 10px; }
+    .lede { color: var(--ink-soft); margin: 0 0 28px; }
+    h2 { font: 600 20px/1.3 "Source Serif 4", Georgia, serif; margin: 34px 0 8px; }
+    p, li { color: var(--ink-body); }
+    ol.steps { list-style: none; counter-reset: s; padding: 0; margin: 0 0 24px; }
+    ol.steps li { counter-increment: s; position: relative; padding: 12px 0 12px 46px; border-top: 1px solid var(--hairline); }
+    ol.steps li:first-child { border-top: 0; }
+    ol.steps li::before { content: counter(s); position: absolute; left: 0; top: 11px; width: 30px; height: 30px; border-radius: 50%; background: var(--paper-sunk); color: var(--ink); font: 600 15px/30px Inter, sans-serif; text-align: center; }
+    .btn { display: block; text-align: center; background: var(--accent); color: #fff; text-decoration: none; font-weight: 600; padding: 15px 20px; border-radius: 999px; }
+    .btn:hover { background: var(--accent-deep); color: #fff; }
+    .alt { text-align: center; font-size: 14px; color: var(--ink-soft); margin: 10px 0 0; }
+    ul { padding-left: 20px; }
+    li { margin: 6px 0; }
+    .foot { max-width: 640px; margin: 0 auto 48px; padding: 0 24px; color: var(--ink-soft); font-size: 13px; }
+    @media (max-width: 600px) { .page { margin: 16px 12px 48px; padding: 32px 22px 36px; } h1 { font-size: 30px; } }
+  </style>
+</head>
+<body>
+  <div class="top"><a href="../">bord</a></div>
+
+  <main class="page">
+    <h1>Delete your bord data</h1>
+    <p class="lede">You can ask us to delete some or all of the data in your bord account and keep the account itself. To remove the account too, see <a href="../delete-account/">Delete your bord account</a>.</p>
+
+    <h2>How to request it</h2>
+    <ol class="steps">
+      <li>Tap the button below. It opens an email to <strong>privacy@bordgame.app</strong> with the subject "Delete my bord data".</li>
+      <li>Add your bord <strong>handle</strong> (your @name) and the <strong>phone number</strong> on the account, and keep the lines for the data you want deleted (or say "all of it").</li>
+      <li>We'll reply to confirm it's you, then delete it within <strong>30 days</strong> and email you when it's done.</li>
+    </ol>
+    <a class="btn" href="mailto:privacy@bordgame.app?subject=Delete%20my%20bord%20data&amp;body=Please%20delete%20this%20data%20from%20my%20bord%20account%20(keep%20the%20lines%20you%20want%2C%20or%20write%20%22all%20of%20it%22)%3A%0A-%20Nights%2C%20tables%20and%20check-ins%0A-%20Friends%20and%20blocks%0A-%20Invites%20I%20sent%20and%20the%20invite%20code%20I%20used%0A-%20Cities%20I%20asked%20bord%20to%20come%20to%0A-%20Photos%20and%20things%20I%20shared%0A-%20My%20post-game%20choices%0A%0AHandle%3A%20%40%0APhone%20number%20on%20the%20account%3A%20">Email us to delete my data</a>
+    <p class="alt">Or write to privacy@bordgame.app from any email address.</p>
+
+    <h2>What you can have deleted</h2>
+    <ul>
+      <li>Your history: nights joined, tables, check-ins and drink orders.</li>
+      <li>Friends and blocks.</li>
+      <li>Invites you sent, and the invite code you used.</li>
+      <li>Cities you asked bord to come to, and the area you asked from.</li>
+      <li>Photos and anything else you shared in bord.</li>
+      <li>Your post-game choices (who you'd play with again).</li>
+    </ul>
+
+    <h2>What stays while you keep the account</h2>
+    <ul>
+      <li><strong>What the account needs to work:</strong> your phone number, handle, table name, date of birth (bord is 18+), password and piece. These go only when you <a href="../delete-account/">delete the account</a>.</li>
+      <li><strong>Your standing</strong> (New, Reliable, Trusted or Probation), since it keeps tables fair for everyone, plus any safety reports about the account.</li>
+      <li><strong>Payment records</strong> held by Apple, Google or our payment provider for as long as tax and accounting law requires.</li>
+      <li><strong>Totals</strong> such as "40 people played this week", which contain no personal information.</li>
+    </ul>
+    <p>Everything you ask us to remove is gone within 30 days. Our <a href="../privacy/">Privacy Policy</a> has the details.</p>
+  </main>
+
+  <p class="foot">&copy; 2026 bord &middot; San Diego &middot; <a href="../privacy/">Privacy</a></p>
+</body>
+</html>
