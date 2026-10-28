@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "5KS3GDKM66.com.webtamu.bord",
+        "paths": ["/i/*", "/m/*", "/v/*", "/d/*"]
+      }
+    ]
+  }
+}

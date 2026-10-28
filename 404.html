@@ -1,0 +1,8 @@
+<!doctype html>
+<!-- GitHub Pages path trick: /i/hex-brick-42 has no file, lands here,
+     bounces to the resolver with the code as a query param. -->
+<script>
+  var m = location.pathname.match(/^\/(i|m|v|d)\/(.+)$/);
+  if (m) location.replace("/" + m[1] + "/?c=" + encodeURIComponent(m[2]) + location.search.replace(/^\?/, "&"));
+  else location.replace("/");
+</script>
