@@ -1,6 +1,6 @@
 /* BORD site — per-section styles, top to bottom.
-   Kraft the whole way down except the Nights map, which is the app's map
-   stock: the one place the cover is cream instead of brown. */
+   Paper the whole way down; kraft is the header and footer (the app's tab
+   bar), and the Nights section is the app's map stock. */
 
 /* --- Header -------------------------------------------------------------- */
 
@@ -96,8 +96,8 @@
   box-shadow: 0 -4px 10px rgba(61,47,33,0.10), var(--shadow-paper);
 }
 .dock-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-.dock-title { font-size: 1.5rem; transform: rotate(-1deg); transform-origin: left bottom; }
-.dock-line { margin-top: 0.75rem; font-size: 0.875rem; font-weight: 700; color: var(--ink); }
+.dock-title { font-size: 1.5rem; }
+.dock-line { margin-top: 0.5rem; font-size: 0.875rem; color: var(--ink-soft); }
 
 /* The night card — the app's session card: pin through the top, the
    featured sticker off the top-left, a second off the bottom-right, the
@@ -116,7 +116,6 @@
 .night-body > p { margin: 0; }
 .night-name { font-weight: 500; font-size: 1.0625rem; line-height: 1.25; }
 .night .join-slot, .night .stamp { margin-top: 0.25rem; margin-right: 0.25rem; justify-self: end; }
-.night .stamp { transform: rotate(-9deg); }
 .night .pips-row { margin-top: 0.125rem; }
 
 @media (max-width: 860px) {
@@ -169,9 +168,7 @@
   font-size: 13px;
   color: var(--ink);
   display: grid; place-items: center;
-  transform: rotate(-3deg);
 }
-.dealt .tile.you { transform: rotate(2deg); }
 .dealt .tile .tape {
   position: absolute; top: -5px; left: 50%;
   width: 22px; height: 7px; margin-left: -11px;
@@ -197,7 +194,6 @@
   font-family: var(--font-micro);
   font-weight: 700;
   opacity: var(--o, 0.75);
-  transform: rotate(var(--r, -6deg));
   color: var(--berry);
 }
 .entry.jade { color: var(--jade); }
@@ -211,7 +207,7 @@
 .entry.box::after  { inset: 5px; border-radius: 3px; border-width: 0.7px; opacity: 0.55; }
 .entry.hex::before, .entry.hex::after { border: 0; background: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-64 -64 128 128'%3E%3Cpath d='M-49.43 -17.6L-49.43 17.6Q-49.43 25.35 -42.72 29.23L-6.71 50.02Q0 53.9 6.71 50.02L42.72 29.23Q49.43 25.35 49.43 17.6L49.43 -17.6Q49.43 -25.35 42.72 -29.23L6.71 -50.02Q0 -53.9 -6.71 -50.02L-42.72 -29.23Q-49.43 -25.35 -49.43 -17.6Z' fill='none' stroke='%23000' stroke-width='3.4'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-64 -64 128 128'%3E%3Cpath d='M-49.43 -17.6L-49.43 17.6Q-49.43 25.35 -42.72 29.23L-6.71 50.02Q0 53.9 6.71 50.02L42.72 29.23Q49.43 25.35 49.43 17.6L49.43 -17.6Q49.43 -25.35 42.72 -29.23L6.71 -50.02Q0 -53.9 -6.71 -50.02L-42.72 -29.23Q-49.43 -25.35 -49.43 -17.6Z' fill='none' stroke='%23000' stroke-width='3.4'/%3E%3C/svg%3E") center / contain no-repeat; inset: 0; }
 .entry.hex::after { inset: 4px; opacity: 0.55; }
-.entry.empty { opacity: 1; transform: none; }
+.entry.empty { opacity: 1; }
 .entry.empty::before { inset: 0; border: 1px dashed rgba(61,47,33,0.22); border-radius: 50%; }
 .entry.empty::after { display: none; }
 .entry.empty.next::after {
@@ -249,8 +245,6 @@
   background: var(--cover);
 }
 .shot .print-caption { text-align: center; }
-.shot .stk.on-corner { bottom: 34px; }
-.shot .stk.tr { top: -14px; bottom: auto; }
 
 @media (max-width: 720px) {
   .shots { grid-template-columns: 1fr; max-width: 20rem; gap: 2.75rem; }
@@ -278,16 +272,26 @@
   margin-bottom: 0.75rem;
 }
 .index-card p { font-size: var(--size-small); color: var(--ink-soft); }
-.index-card .hand.ruled {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--ink);
-  background: repeating-linear-gradient(to bottom, transparent 0 calc(1.7em - 1px), var(--hairline) calc(1.7em - 1px) 1.7em);
+/* Standing is a plain label (the premium pass): three words on a rule,
+   the top one in ink. */
+.tier-row {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  list-style: none;
+  margin-top: 1rem;
+  font-size: var(--size-small);
+  font-weight: 500;
+  color: var(--ink-soft);
 }
-.tier-row { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem; }
-.tier-row .stamp { transform: rotate(-6deg); }   /* the app's tier stamps */
-.tier-arrow { color: var(--ink-soft); font-size: 0.875rem; }
-.duo { display: flex; gap: 2px; margin-top: 0.75rem; }
+.tier-row li { display: flex; align-items: center; gap: 0.625rem; }
+.tier-row li + li::before {
+  content: "";
+  width: 1.25rem;
+  height: 1px;
+  background: rgba(61, 47, 33, 0.3);
+}
+.tier-row .is-top { color: var(--ink); }
 
 @media (max-width: 780px) { .trust-grid { grid-template-columns: 1fr; } }
 
@@ -301,10 +305,15 @@
 }
 .shops-copy { display: flex; flex-direction: column; gap: 1.375rem; align-items: flex-start; }
 .shops-copy > p { color: var(--ink-body); }
-.shops-points { display: flex; flex-direction: column; gap: 1rem; list-style: none; }
-.shops-points li { display: flex; gap: 0.75rem; align-items: flex-start; font-size: var(--size-small); color: var(--ink-body); }
-.shops-points strong { color: var(--ink); font-weight: 500; }
-.stk.point { margin-top: -2px; }
+.shops-points { display: flex; flex-direction: column; list-style: none; width: 100%; max-width: 34rem; }
+.shops-points li {
+  padding-block: 0.875rem;
+  border-top: 1px solid var(--hairline);
+  font-size: var(--size-small);
+  color: var(--ink-soft);
+}
+.shops-points li:last-child { border-bottom: 1px solid var(--hairline); }
+.shops-points strong { display: block; color: var(--ink); font-weight: 500; font-size: var(--size-body); margin-bottom: 0.125rem; }
 
 .shop-shot { max-width: 20rem; justify-self: center; }
 
@@ -361,18 +370,21 @@
 /* The week — the dock, expanded, the way it lists them */
 .week { width: min(100%, 28rem); margin-inline: auto; padding-top: 1rem; }
 .week .grabber { display: block; width: 40px; height: 5px; border-radius: 3px; background: rgba(61,47,33,0.28); margin: 0 auto 0.25rem; }
-.week .hint { text-align: center; font-size: 0.8125rem; color: var(--ink-soft); margin-top: 1.5rem; }
 
 /* --- Closing CTA ------------------------------------------------------------------ */
 
 .get-app { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1rem; }
 .cta-bord { margin-bottom: 0.5rem; transform: rotate(-5deg); }
-.quip { font-size: 1.125rem; color: var(--ink-body); }
 .store-badges { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; }
 .store-badges img { height: 3.375rem; width: auto; display: block; }
 
 /* --- Footer -------------------------------------------------------------------------- */
 
-.site-footer { border-top: 1px solid var(--hairline); padding-block: 2.5rem; }
+.site-footer {
+  background: var(--cover) url("../img/fiber.svg") repeat;
+  background-size: 360px 360px;
+  border-top: 1px solid var(--hairline);
+  padding-block: 2.5rem;
+}
 .site-footer .wrap { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
 .site-footer small { color: var(--ink-body); font-size: 0.8125rem; }

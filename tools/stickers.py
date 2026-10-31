@@ -266,13 +266,16 @@ def die(pips):
 for n in range(1, 7): symbols[f"die{n}"] = die(n)
 
 # Pushpin head — the flat sticker-language pin: disc + hairline + jelly glint + contact whisper
-for name, col in (("pin-red", "#D23B2F"), ("pin-yellow", "#F2B714"), ("pin-green", "#439856"), ("pin-white", "#F8F6F2")):
+for name, col in (("pin-red", "#D23B2F"), ("pin-yellow", "#F2B714"), ("pin-green", "#439856"), ("pin-white", "#F8F6F2"),
+                  # the premium pass (2026-10-25): two colours, ink for the week, accent for tonight
+                  ("pin-ink", "#3D2F21"), ("pin-accent", "#7C5CC4")):
     symbols[name] = (P(ellipse(0, 52, 80, 26), INK, op=.10)
         + P(circle(0, 0, 100), col) + P(circle(0, 0, 99.2), "none", INK, .8, extra='stroke-opacity=".15"')
         + glint(-50, -50, 100))
 
 # Map die pin — 25 head on a 2.8 × 16 steel needle; numeral set by the page
-for name, col, num in (("mappin-red", "#D23B2F", WHITE), ("mappin-yellow", "#F2B714", INK), ("mappin-green", "#439856", WHITE), ("mappin-white", "#F8F6F2", INK)):
+for name, col, num in (("mappin-red", "#D23B2F", WHITE), ("mappin-yellow", "#F2B714", INK), ("mappin-green", "#439856", WHITE), ("mappin-white", "#F8F6F2", INK),
+                       ("mappin-ink", "#3D2F21", WHITE), ("mappin-accent", "#7C5CC4", WHITE)):
     # box 0..48 × 0..52, tip at (24, 52)
     needle = "M22.6 24 H25.4 L24.28 51.04 L24 52 L23.72 51.04 Z"
     symbols[name] = (f'<g transform="translate(-24 -26)">'

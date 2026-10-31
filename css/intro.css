@@ -106,16 +106,6 @@
   to   { opacity: 1; transform: none; }
 }
 
-/* The quip under the mark — one line, the app's launch line, arrives
-   after the letters have filled. */
-.intro-quip {
-  font-family: var(--font-body);
-  font-size: 0.9375rem;
-  color: var(--ink-soft);
-  opacity: 0;
-}
-.intro.is-playing .intro-quip { animation: intro-appear 400ms ease-out 1500ms forwards; }
-
 /* --- Bord in the o (2026-10-25) -----------------------------------------
    The app's LaunchView, mascot path: Bord sits in the tile's exact slot and
    rolls his dice flip once, on every load. His model: viewBox 580 × 600,
