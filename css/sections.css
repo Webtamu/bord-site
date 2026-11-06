@@ -115,7 +115,7 @@
 .night-body { min-width: 0; display: flex; flex-direction: column; gap: 0.5rem; }
 .night-body > p { margin: 0; }
 .night-name { font-weight: 500; font-size: 1.0625rem; line-height: 1.25; }
-.night .join-slot, .night .stamp { margin-top: 0.25rem; margin-right: 0.25rem; justify-self: end; }
+.night .join-slot, .night .stamp, .night .going { margin-top: 0.25rem; margin-right: 0.25rem; justify-self: end; }
 .night .pips-row { margin-top: 0.125rem; }
 
 @media (max-width: 860px) {
@@ -175,14 +175,16 @@
   background: var(--sky); opacity: 0.88;
   transform: rotate(-5deg);
 }
+/* the table, as the app draws it now: a sunk capsule with the seat count */
 .dealt .tabletop {
-  width: 58px; height: 34px;
-  background: var(--cover-deep);
-  border-radius: 8px;
-  border: 1px solid rgba(61,47,33,0.35);
+  height: 30px; padding: 0 14px;
+  background: var(--paper-sunk);
+  border-radius: 999px;
+  border: 1px solid var(--hairline);
   display: grid; place-items: center;
+  font-family: var(--font-body); font-weight: 700; font-size: 12px;
+  color: var(--ink-soft); white-space: nowrap;
 }
-.dealt .tabletop svg { width: 28px; height: 28px; transform: rotate(-8deg); }
 
 /* the passport strip, for step three: entry stamps, then the empties */
 .passport { display: flex; align-items: center; gap: 8px; }
@@ -246,9 +248,20 @@
 }
 .shot .print-caption { text-align: center; }
 
+/* Phones: the prints sit in one swipeable strip instead of a three-screen
+   stack, the next print peeking in so the swipe is obvious. */
 @media (max-width: 720px) {
-  .shots { grid-template-columns: 1fr; max-width: 20rem; gap: 2.75rem; }
-  .shot:nth-child(2) { transform: rotate(0.6deg); }
+  .shots {
+    display: flex; gap: 1.25rem; max-width: none;
+    margin-inline: calc(var(--gutter) * -1);
+    padding: 1.5rem var(--gutter) 2rem;
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .shots::-webkit-scrollbar { display: none; }
+  .shots .shot { flex: 0 0 72%; scroll-snap-align: start; }
+  .shots .shot.lean-l, .shots .shot.lean-r { transform: none; }
 }
 
 /* --- Trust — three index cards ----------------------------------------------- */

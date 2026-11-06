@@ -31,6 +31,7 @@ body {
 img, svg { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 ::selection { background: var(--accent); color: var(--paper); }
+input, textarea { caret-color: var(--accent); }
 
 /* --- Type roles ------------------------------------------------------- */
 
@@ -310,6 +311,19 @@ section { padding-block: var(--section-pad); }
   border-radius: 5px;
 }
 .stamp.is-jade { color: var(--jade); }
+
+/* --- Going — the app's badge: a jade pill with a check (it replaced the
+       GOING rubber stamp in the app, 2026-11-04). ----------------------- */
+.going {
+  display: inline-flex; align-items: center; gap: 0.35em;
+  font-family: var(--font-body); font-weight: 700; font-size: 0.875rem;
+  color: var(--jade);
+  background: rgba(62, 115, 81, 0.12);
+  padding: 0.3em 0.8em 0.3em 0.6em;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.going svg { width: 0.95em; height: 0.95em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .stamp.is-pencil { color: var(--ink-soft); }
 .stamp.is-big { font-size: 0.875rem; }
 
