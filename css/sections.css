@@ -378,7 +378,10 @@
   fill: rgba(61,47,33,0.45);
 }
 .pin-num { font-family: var(--font-body); font-weight: 700; font-size: 14px; font-variant-numeric: tabular-nums; }
-@media (max-width: 1000px) { .pilot-map svg { display: none; } }
+/* Narrow screens keep the map (roads, water, park) — it is the section's
+   ground. Only the pins and labels go: there's no margin left for them,
+   and they would sit under the week's cards. */
+@media (max-width: 1000px) { .pilot-map .map-markers { display: none; } }
 
 /* The week — the dock, expanded, the way it lists them */
 .week { width: min(100%, 28rem); margin-inline: auto; padding-top: 1rem; }
