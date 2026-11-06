@@ -388,3 +388,17 @@
 }
 .site-footer .wrap { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
 .site-footer small { color: var(--ink-body); font-size: 0.8125rem; }
+
+/* For shops: the three steps, numbered like the poster */
+.shops-steps li { display: grid; grid-template-columns: 2rem 1fr; gap: 0.75rem; align-items: start; }
+.shops-steps .step-n {
+  width: 1.75rem; height: 1.75rem; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--ink); color: var(--paper);
+  font-size: 0.875rem; font-weight: 600; line-height: 1;
+  margin-top: 0.125rem;
+}
+
+/* The shop console row under the pitch */
+.console { margin-top: clamp(3.5rem, 8vw, 6rem); }
+.console .section-head h3 { font-size: var(--size-h2, 2rem); }

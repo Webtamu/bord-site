@@ -15,7 +15,7 @@
        whenever css/ or js/ change, or visitors keep the old rules. -->
   <link rel="stylesheet" href="css/tokens.css?v=20261031" />
   <link rel="stylesheet" href="css/base.css?v=20261031" />
-  <link rel="stylesheet" href="css/sections.css?v=20261031" />
+  <link rel="stylesheet" href="css/sections.css?v=20261105" />
   <link rel="stylesheet" href="css/bord-mascot.css?v=20261025" />
   <link rel="stylesheet" href="css/intro.css?v=20261031" />
   <noscript><style>.intro { display: none; }</style></noscript>
@@ -1182,30 +1182,57 @@
 
   <!-- For shops ................................................................ -->
   <section id="shops">
-    <div class="wrap shops-grid">
-      <div class="shops-copy">
-        <h2 class="display" data-reveal>Your slow nights, <span class="underlined">full.</span></h2>
-        <p data-reveal>You keep the games you already have. We bring the people.</p>
-        <ul class="shops-points">
-          <li data-reveal><span><strong>Your shelf, your rules.</strong> Whatever&rsquo;s on
-            the shelf is what gets played. Nothing to buy or manage.</span></li>
-          <li data-reveal><span><strong>People through the door.</strong> Every seat we fill
-            is someone at your counter on a night that used to be quiet.</span></li>
-          <li data-reveal><span><strong>You set the nights.</strong> Tell us which tables
-            and evenings are open each week. Your staff never touch the
-            app.</span></li>
-          <li data-reveal><span><strong>Your shop&rsquo;s page.</strong> The photos people
-            share, the nights, the regulars. All on one page.</span></li>
-        </ul>
-        <a class="btn btn-primary" href="mailto:shops@bordgame.app" data-reveal>Get your shop on bord</a>
+    <div class="wrap">
+      <div class="shops-grid">
+        <div class="shops-copy">
+          <h2 class="display" data-reveal>Your slow nights, <span class="underlined">full.</span></h2>
+          <p data-reveal>We bring the board games and the players. You pour the drinks.</p>
+          <ol class="shops-points shops-steps">
+            <li data-reveal><span class="step-n" aria-hidden="true">1</span><span><strong>We gift you board games.</strong>
+              A shelf of games for your tables, and your shop goes on the bord map.</span></li>
+            <li data-reveal><span class="step-n" aria-hidden="true">2</span><span><strong>Players find you.</strong>
+              On bord they see your shop, the games on your shelf, and who else
+              is waiting to play.</span></li>
+            <li data-reveal><span class="step-n" aria-hidden="true">3</span><span><strong>They come in and play.</strong>
+              A player joins a night, drives over, buys drinks at your counter,
+              and sits down to a game.</span></li>
+          </ol>
+          <a class="btn btn-primary" href="mailto:shops@bordgame.app" data-reveal>Get your shop on bord</a>
+        </div>
+
+        <!-- The shop's page, as the app draws it -->
+        <figure class="shot shop-shot lean-r" data-reveal>
+          <span class="washi top-l taro" aria-hidden="true"></span>
+          <img src="img/screens/venue.webp" width="720" height="1483" loading="lazy" alt="A shop's page in the app: a photo of a table mid-game, the shop's name and a short note, the shelf as game stickers, and the week's nights with JOIN stamps." />
+          <figcaption class="print-caption">your page on bord</figcaption>
+        </figure>
       </div>
 
-      <!-- The shop's page, as the app draws it -->
-      <figure class="shot shop-shot lean-r" data-reveal>
-        <span class="washi top-l taro" aria-hidden="true"></span>
-        <img src="img/screens/venue.webp" width="720" height="1483" loading="lazy" alt="A shop's page in the app: a photo of a table mid-game, the shop's name and a short note, the shelf as game stickers, and the week's nights with JOIN stamps." />
-        <figcaption class="print-caption">GameHaus, the page</figcaption>
-      </figure>
+      <!-- The shop console: the same app, signed in as the shop -->
+      <div class="console">
+        <div class="section-head centered">
+          <h3 class="display" data-reveal>Your shop console</h3>
+          <p class="lede" data-reveal>The same app, signed in as your shop. Set your nights, see who&rsquo;s
+             coming, watch the numbers. Your staff barely touch it.</p>
+        </div>
+        <div class="shots">
+          <figure class="shot lean-l" data-reveal>
+            <span class="washi top matcha" aria-hidden="true"></span>
+            <img src="img/screens/console-tonight.webp" width="720" height="1483" loading="lazy" alt="The shop console's Tonight screen: who has walked in, tonight's tables, and the players still due in." />
+            <figcaption class="print-caption">who&rsquo;s in tonight</figcaption>
+          </figure>
+          <figure class="shot" data-reveal>
+            <span class="washi top butter stripe" aria-hidden="true"></span>
+            <img src="img/screens/console-week.webp" width="720" height="1483" loading="lazy" alt="The shop console's week: each day's night with its seats filled, marked open or paused, and empty days you can add a night to." />
+            <figcaption class="print-caption">open or pause a night</figcaption>
+          </figure>
+          <figure class="shot lean-r" data-reveal>
+            <span class="washi top sky" aria-hidden="true"></span>
+            <img src="img/screens/console-numbers.webp" width="720" height="1483" loading="lazy" alt="The shop console's numbers: players seated this week, seats filled, show rate, a chart of the last seven nights, and who signed up." />
+            <figcaption class="print-caption">how your nights are doing</figcaption>
+          </figure>
+        </div>
+      </div>
     </div>
   </section>
 
